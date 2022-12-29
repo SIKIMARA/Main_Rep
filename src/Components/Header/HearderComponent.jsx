@@ -13,7 +13,7 @@ import ListeFavoris from "../BodyComponent/ListeFavoris";
 import Marques from "../BodyComponent/Marques";
 import Offres from "../BodyComponent/Offres";
 import Locataire from "../BodyComponent/Dashboard/Locataire";
-
+import Categories from "../BodyComponent/Categories";
 export default function HearderComponent() {
   const classes = useStyles();
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -40,6 +40,7 @@ export default function HearderComponent() {
           <Route exact path="/ListeFavoris" render={() => <ListeFavoris />} />
           <Route exact path="/Marques" render={() => <Marques />} />
           <Route exact path="/Offres" render={() => <Offres />} />
+          <Route exact path="/Categories" render={() => <Categories />} />
         </Switch>
       </Box>
     </Fragment>

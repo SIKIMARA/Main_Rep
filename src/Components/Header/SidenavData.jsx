@@ -16,6 +16,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import BookIcon from "@material-ui/icons/Book";
 import PostAddIcon from "@material-ui/icons/PostAdd";
 import NotificationsActiveIcon from "@material-ui/icons/NotificationsActive";
+import ViewAgendaIcon from "@material-ui/icons/ViewAgenda";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import PersonIcon from "@material-ui/icons/Person";
 export default function SidenavData({ handleDrawerClose }) {
@@ -47,6 +48,11 @@ export default function SidenavData({ handleDrawerClose }) {
       label: "Marques",
       link: "/Marques",
       icon: <DirectionsCarIcon />,
+    },
+    {
+      label: "Categories",
+      link: "/Categories",
+      icon: <ViewAgendaIcon />,
     },
     { label: "logout", link: "/logout", icon: <ExitToAppIcon /> },
   ];
