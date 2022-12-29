@@ -144,7 +144,7 @@ export default function ListeNoirs() {
               index % 2 === 0 ? { background: "#f5f5f5" } : null,
             headerStyle: { background: "#4d4020", color: "#fff" },
           }}
-          title="Utilisateurs"
+          title="Liste noire"
           icons={{ Add: () => <AddIcon /> }}
         />
       </ThemeProvider>
