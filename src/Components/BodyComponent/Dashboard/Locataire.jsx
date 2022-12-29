@@ -91,14 +91,6 @@ export default function Locataire() {
                 setTimeout(() => resolve(), 1000);
               }),
           }}
-          actions={[
-            {
-              icon: () => <GetAppIcon />,
-              tooltip: "Click me",
-              onClick: (e, data) => console.log(data),
-              isFreeAction: true,
-            },
-          ]}
           onSelectionChange={(selectedRows) => console.log(selectedRows)}
           options={{
             sorting: true,
@@ -120,8 +112,8 @@ export default function Locataire() {
             addRowPosition: "first",
             actionsColumnIndex: -1,
             selection: true,
-            showSelectAllCheckbox: false,
-            showTextRowsSelected: false,
+            showSelectAllCheckbox: true,
+            showTextRowsSelected: true,
             selectionProps: (rowData) => ({
               disabled: rowData.age == null,
               // color:"primary"
@@ -132,7 +124,7 @@ export default function Locataire() {
               index % 2 === 0 ? { background: "#f5f5f5" } : null,
             headerStyle: { background: "#4d4020", color: "#fff" },
           }}
-          title="Locataires"
+          title="Utilisateurs"
           icons={{ Add: () => <AddIcon /> }}
         />
       </ThemeProvider>
