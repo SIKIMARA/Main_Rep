@@ -8,8 +8,11 @@ import {
 } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
 import { useStyles } from "./HeaderStyle";
-
+import DirectionsCarIcon from "@material-ui/icons/DirectionsCar";
+import SentimentVeryDissatisfiedIcon from "@material-ui/icons/SentimentVeryDissatisfied";
 import DashboardIcon from "@material-ui/icons/Dashboard";
+import RedeemIcon from "@material-ui/icons/Redeem";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 import BookIcon from "@material-ui/icons/Book";
 import PostAddIcon from "@material-ui/icons/PostAdd";
 import NotificationsActiveIcon from "@material-ui/icons/NotificationsActive";
@@ -19,17 +22,31 @@ export default function SidenavData({ handleDrawerClose }) {
   const classes = useStyles();
   const listItemData = [
     { label: "Dashboard", link: "/", icon: <DashboardIcon /> },
-    { label: "Blog Post", link: "/blog", icon: <BookIcon /> },
-    { label: "Link 1", link: "/link1", icon: <PostAddIcon /> },
+
     {
-      label: "Notification",
-      link: "/notification",
-      icon: <NotificationsActiveIcon />,
+      label: "Utilisateurs",
+      link: "/Utilisateurs",
+      icon: <PersonIcon></PersonIcon>,
     },
     {
-      label: "Locataire",
-      link: "/Locataire",
-      icon: <PersonIcon></PersonIcon>,
+      label: "Liste Noire",
+      link: "/ListeNoirs",
+      icon: <SentimentVeryDissatisfiedIcon />,
+    },
+    {
+      label: "Liste Favoris",
+      link: "/ListeFavoris",
+      icon: <FavoriteIcon />,
+    },
+    {
+      label: "Offres",
+      link: "/Offres",
+      icon: <RedeemIcon />,
+    },
+    {
+      label: "Marques",
+      link: "/Marques",
+      icon: <DirectionsCarIcon />,
     },
     { label: "logout", link: "/logout", icon: <ExitToAppIcon /> },
   ];

@@ -8,6 +8,10 @@ import Notification from "./ActionTab/Notification";
 import BlogPost from "../BodyComponent/BlogPost";
 import Dashboard from "../BodyComponent/Dashboard/Dashboard";
 import Link1 from "../BodyComponent/Link1";
+import ListeNoirs from "../BodyComponent/ListeNoirs";
+import ListeFavoris from "../BodyComponent/ListeFavoris";
+import Marques from "../BodyComponent/Marques";
+import Offres from "../BodyComponent/Offres";
 import Locataire from "../BodyComponent/Dashboard/Locataire";
 
 export default function HearderComponent() {
@@ -31,10 +35,11 @@ export default function HearderComponent() {
       <Box className={classes.wrapper}>
         <Switch>
           <Route exact path="/" render={() => <Dashboard />} />
-          <Route exact path="/blog" render={() => <BlogPost />} />
-          <Route exact path="/link1" render={() => <Link1 />} />
-          <Route exact path="/notification" render={() => <Notification />} />
-          <Route exact path="/Locataire" render={() => <Locataire />} />
+          <Route exact path="/Utilisateurs" render={() => <Locataire />} />
+          <Route exact path="/ListeNoirs" render={() => <ListeNoirs />} />
+          <Route exact path="/ListeFavoris" render={() => <ListeFavoris />} />
+          <Route exact path="/Marques" render={() => <Marques />} />
+          <Route exact path="/Offres" render={() => <Offres />} />
         </Switch>
       </Box>
     </Fragment>

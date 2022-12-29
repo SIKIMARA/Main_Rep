@@ -7,7 +7,7 @@ import { ThemeProvider, createTheme } from "@mui/material";
 import SentimentVeryDissatisfiedIcon from "@material-ui/icons/SentimentVeryDissatisfied";
 import HelpIcon from "@material-ui/icons/Help";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-export default function Locataire() {
+export default function Marques() {
   const defaultMaterialTheme = createTheme();
   const [tableData, setTableData] = useState([
     {
