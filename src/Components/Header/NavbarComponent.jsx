@@ -9,10 +9,8 @@ import {
 } from "@material-ui/core";
 import { useStyles } from "./HeaderStyle";
 import MenuRoundedIcon from "@material-ui/icons/MenuRounded";
-
-import Notification from "./ActionTab/Notification";
-import Profile from "./ActionTab/Profile";
-import Messages from "./ActionTab/Messages";
+import locationVoiture from "../../Images/transparentvb.png";
+import PersonIcon from "@material-ui/icons/Person";
 
 export default function NavbarComponent({ handleDrawerToggle }) {
   const classes = useStyles();
@@ -20,20 +18,16 @@ export default function NavbarComponent({ handleDrawerToggle }) {
   return (
     <AppBar>
       <Toolbar className={classes.toolbar}>
-        <Box style={{ display: "flex" }}>
-          <Typography variant="h5" className={classes.logo}>
-            {"<AdminPannel />"}
-          </Typography>
-        </Box>
+        <Box
+          component="img"
+          src={locationVoiture}
+          sx={{
+            height: 53,
+            width: 150,
+          }}
+        ></Box>
         <Hidden smDown>
-          <Box>
-            <Profile />
-          </Box>
-        </Hidden>
-        <Hidden mdUp>
-          <IconButton color="inherit" onClick={handleDrawerToggle}>
-            <MenuRoundedIcon />
-          </IconButton>
+          <Box component="text">ESPACE ADMINISTRATEUR</Box>
         </Hidden>
       </Toolbar>
     </AppBar>

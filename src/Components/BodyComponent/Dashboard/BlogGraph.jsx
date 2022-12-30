@@ -23,16 +23,16 @@ export default function BlogGraph() {
         {
           label: "Current Month",
           data: fakeArrayGenrator({ length: 30, digit: 100 }),
-          borderColor: blue["A400"],
-          backgroundColor: "rgb(21 101 192 /50%)",
+          borderColor: "#f2af0c",
+          backgroundColor: "rgb(168 141 79 /30%)",
           fill: true,
           tension: 0.5,
         },
         {
           label: "Last Month",
           data: fakeArrayGenrator({ length: 30, digit: 100 }),
-          borderColor: red[500],
-          backgroundColor: "rgb(198 40 40 /30%)",
+          borderColor: "#241a03",
+          backgroundColor: "rgb(79 66 36 /30%)",
           fill: true,
           tension: 0.5,
         },
@@ -46,8 +46,8 @@ export default function BlogGraph() {
         {
           label: "DeskTop",
           data: fakeArrayGenrator({ length: 3, digit: 1000 }),
-          borderColor: [blue[50], blue[800], blue[500]],
-          backgroundColor: [blue["A200"], blue[400], blue[200]],
+          borderColor: ["#dfc482", "#a88d4f", "#0000000"],
+          backgroundColor: ["#dfc482", "#a88d4f", "#000000"],
           fill: true,
           tension: 0.5,
         },
@@ -75,15 +75,16 @@ export default function BlogGraph() {
       <Grid item xs={12} sm={7} md={7}>
         <Card component={Paper}>
           <CardContent>
-            <Typography variant='h6' className={classes.cardTitle} align='left'>
+            <Typography variant="h6" className={classes.cardTitle} align="left">
               User Overviews
             </Typography>
           </CardContent>
           <Divider />
           <CardContent>
             <canvas
-              id='userOverViewGraph'
-              className={classes.generalGraph}></canvas>
+              id="userOverViewGraph"
+              className={classes.generalGraph}
+            ></canvas>
           </CardContent>
         </Card>
       </Grid>
@@ -91,15 +92,16 @@ export default function BlogGraph() {
       <Grid item xs={12} sm={5} md={5}>
         <Card component={Paper}>
           <CardContent>
-            <Typography variant='h6' className={classes.cardTitle} align='left'>
+            <Typography variant="h6" className={classes.cardTitle} align="left">
               Used by graph
             </Typography>
           </CardContent>
           <Divider />
           <CardContent>
             <canvas
-              id='deviceOverViewGraph'
-              className={classes.generalGraph}></canvas>
+              id="deviceOverViewGraph"
+              className={classes.generalGraph}
+            ></canvas>
           </CardContent>
         </Card>
       </Grid>

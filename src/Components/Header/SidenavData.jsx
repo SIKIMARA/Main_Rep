@@ -54,6 +54,11 @@ export default function SidenavData({ handleDrawerClose }) {
       link: "/Categories",
       icon: <ViewAgendaIcon />,
     },
+    {
+      label: "Reserrvations",
+      link: "/Reservations",
+      icon: <BookIcon />,
+    },
     { label: "logout", link: "/logout", icon: <ExitToAppIcon /> },
   ];
 
