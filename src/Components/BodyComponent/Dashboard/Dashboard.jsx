@@ -94,7 +94,7 @@ export default function Dashboard() {
   return (
     <Box mt={2}>
       {/* //title section  */}
-      <PageHeader label='Dashboard' title='Blog Overview' />
+      <PageHeader label="Dashboard" title="Blog Overview" />
 
       <Grid container spacing={1} className={classes.section}>
         {DisplayData.map((item, i) => (
@@ -103,28 +103,32 @@ export default function Dashboard() {
               <CardContent className={classes.displayCard}>
                 <canvas
                   id={item.label}
-                  className={classes.displayCardGraph}></canvas>
+                  className={classes.displayCardGraph}
+                ></canvas>
                 <Box className={classes.cardDataContent}>
                   <Typography
-                    variant='subtitle2'
+                    variant="subtitle2"
                     className={classes.cardLabel}
-                    gutterBottom={true}>
+                    gutterBottom={true}
+                  >
                     {item.label}
                   </Typography>
                   <Typography
-                    variant='h4'
-                    component='h2'
-                    className={classes.cardHeader}>
+                    variant="h4"
+                    component="h2"
+                    className={classes.cardHeader}
+                  >
                     {item.value}
                   </Typography>
                   <Box className={classes.ratio}>
                     <Button
                       startIcon={item.icon}
-                      size='small'
+                      size="small"
                       style={{
                         color: item.label[0] === "P" ? green[700] : red[400],
                         fontSize: "1.1rem",
-                      }}>
+                      }}
+                    >
                       {item.iconLabel}
                     </Button>
                   </Box>

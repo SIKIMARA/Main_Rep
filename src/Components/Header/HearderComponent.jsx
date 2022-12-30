@@ -3,8 +3,9 @@ import { Box } from "@material-ui/core";
 import { Route, Switch } from "react-router-dom";
 import { useStyles } from "./HeaderStyle";
 import NavbarComponent from "./NavbarComponent";
+import Dashboard1 from "../Dashboard1";
 import Sidenav from "./Sidenav";
-
+import Acceuil from "../Acceuil/Acceuil";
 import Dashboard from "../BodyComponent/Dashboard/Dashboard";
 
 import ListeNoirs from "../BodyComponent/ListeNoirs";
@@ -27,23 +28,43 @@ export default function HearderComponent() {
   return (
     <Fragment>
       <NavbarComponent handleDrawerToggle={handleDrawerToggle} />
-      <Sidenav
-        mobileOpen={mobileOpen}
-        handleDrawerClose={handleDrawerClose}
-        handleDrawerToggle={handleDrawerToggle}
-      />
-      <Box className={classes.wrapper}>
-        <Switch>
-          <Route exact path="/" render={() => <Dashboard />} />
-          <Route exact path="/Utilisateurs" render={() => <Locataire />} />
-          <Route exact path="/ListeNoirs" render={() => <ListeNoirs />} />
-          <Route exact path="/ListeFavoris" render={() => <ListeFavoris />} />
-          <Route exact path="/Marques" render={() => <Marques />} />
-          <Route exact path="/Offres" render={() => <Offres />} />
-          <Route exact path="/Categories" render={() => <Categories />} />
-          <Route exact path="/Reservations" render={() => <Reservations />} />
-        </Switch>
-      </Box>
+      <Switch>
+        <Route exact path="/" render={() => <Acceuil />} />
+        <Route exact path="/Dashboard/" render={() => <Dashboard1 />} />
+        <Route
+          exact
+          path="/Dashboard/utilisateurs"
+          render={() => <Dashboard1 />}
+        />
+        <Route
+          exact
+          path="/Dashboard/dashboard"
+          render={() => <Dashboard1 />}
+        />
+
+        <Route
+          exact
+          path="/Dashboard/ListeNoirs"
+          render={() => <Dashboard1 />}
+        />
+        <Route
+          exact
+          path="/Dashboard/ListeFavoris"
+          render={() => <Dashboard1 />}
+        />
+        <Route exact path="/Dashboard/Marques" render={() => <Dashboard1 />} />
+        <Route exact path="/Dashboard/Offres" render={() => <Dashboard1 />} />
+        <Route
+          exact
+          path="/Dashboard/Categories"
+          render={() => <Dashboard1 />}
+        />
+        <Route
+          exact
+          path="/Dashboard/Reservations"
+          render={() => <Dashboard1 />}
+        />
+      </Switch>
     </Fragment>
   );
 }

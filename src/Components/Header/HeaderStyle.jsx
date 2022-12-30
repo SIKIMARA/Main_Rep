@@ -36,6 +36,7 @@ export const useStyles = makeStyles((theme) => {
       display: "flex",
       flexFlow: "row wrap",
       justifyContent: "space-between",
+      position: "relative",
       backgroundColor: "#dfc482",
     },
     brandBox: {

@@ -22,44 +22,48 @@ import PersonIcon from "@material-ui/icons/Person";
 export default function SidenavData({ handleDrawerClose }) {
   const classes = useStyles();
   const listItemData = [
-    { label: "Dashboard", link: "/", icon: <DashboardIcon /> },
+    {
+      label: "Dashboard",
+      link: "/Dashboard/Dashboard",
+      icon: <DashboardIcon />,
+    },
 
     {
       label: "Utilisateurs",
-      link: "/Utilisateurs",
+      link: "/Dashboard/Utilisateurs",
       icon: <PersonIcon></PersonIcon>,
     },
     {
       label: "Liste Noire",
-      link: "/ListeNoirs",
+      link: "/Dashboard/ListeNoirs",
       icon: <SentimentVeryDissatisfiedIcon />,
     },
     {
       label: "Liste Favoris",
-      link: "/ListeFavoris",
+      link: "/Dashboard/ListeFavoris",
       icon: <FavoriteIcon />,
     },
     {
       label: "Offres",
-      link: "/Offres",
+      link: "/Dashboard/Offres",
       icon: <RedeemIcon />,
     },
     {
       label: "Marques",
-      link: "/Marques",
+      link: "/Dashboard/Marques",
       icon: <DirectionsCarIcon />,
     },
     {
       label: "Categories",
-      link: "/Categories",
+      link: "/Dashboard/Categories",
       icon: <ViewAgendaIcon />,
     },
     {
       label: "Reserrvations",
-      link: "/Reservations",
+      link: "/Dashboard/Reservations",
       icon: <BookIcon />,
     },
-    { label: "logout", link: "/logout", icon: <ExitToAppIcon /> },
+    { label: "logout", link: "/Dashboard/logout", icon: <ExitToAppIcon /> },
   ];
 
   return (
