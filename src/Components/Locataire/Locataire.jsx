@@ -9,7 +9,7 @@ const useStyles = makeStyles({});
 export default function Locataire() {
   const classes = useStyles();
   return (
-    <div style={{ marginLeft: "20vw" }}>
+    <div>
       <Card
         style={{
           margin: 30,

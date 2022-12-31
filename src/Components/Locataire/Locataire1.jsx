@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { useStyles } from "../BodyComponent/BodyStyles";
+import { useStyles } from "../Header/HeaderStyle";
 import SideNavLocataire from "./SideNavLocataire";
 import { Box } from "@material-ui/core";
 import { Route, Switch } from "react-router-dom";
