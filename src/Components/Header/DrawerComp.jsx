@@ -8,7 +8,7 @@ import {
   ListItemText,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import locationVoiture from "../../Images/transparentvb.png";
+import locationVoiture from "../../Images/transparentvw.png";
 const pages = ["Acceuil", "Voitures", "Locataire", "Proprietaire"];
 const DrawerComp = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -34,7 +34,7 @@ const DrawerComp = () => {
         </List>
       </Drawer>
       <IconButton
-        sx={{ color: "white", marginLeft: "auto" }}
+        sx={{ color: "black", marginLeft: "auto" }}
         onClick={() => setOpenDrawer(!openDrawer)}
       >
         <MenuIcon color="white" />
