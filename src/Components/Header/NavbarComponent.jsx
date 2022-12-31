@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -6,44 +6,42 @@ import {
   Typography,
   makeStyles,
   Box,
+  Tab,
+  Tabs,
+  Button,
+  useMediaQuery,
+  useTheme,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import locationVoiture from "../../Images/transparentvw.png";
 import LanguageSwitch from "./LanguageSwitch";
+import DrawerComp from "./DrawerComp";
 
 const useStyles = makeStyles((theme) => ({
-  navlinks: {
-    marginLeft: theme.spacing(10),
-    display: "flex",
-    color: "#000000",
-  },
   logo: {
     flexGrow: "1",
     cursor: "pointer",
   },
+  toolbar: {},
   logoBrand: { margin: "5px" },
-  toolbar: {
-    backgroundColor: "#ffffff",
-  },
-  link: {
-    textDecoration: "none",
-    color: "black",
-    fontSize: "20px",
-    marginLeft: theme.spacing(20),
-    "&:hover": {
-      color: "yellow",
-      borderBottom: "1px solid white",
-    },
-  },
 }));
 
 function Navbar() {
+  const [value, setValue] = useState();
   const classes = useStyles();
-
+  const theme = useTheme();
+  const isMatch = useMediaQuery(theme.breakpoints.down("md"));
   return (
     <AppBar position="static">
       <CssBaseline />
-      <Toolbar className={classes.toolbar}>
+      <Toolbar
+        style={{
+          backgroundColor: "white",
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+        className={classes.toolbar}
+      >
         <Box
           className={classes.logoBrand}
           component="img"
@@ -53,18 +51,47 @@ function Navbar() {
             width: 150,
           }}
         ></Box>
-        <div className={classes.navlinks}>
-          <Link to="/" className={classes.link}>
-            Home
-          </Link>
-          <LanguageSwitch />
-          <Link to="/contact" className={classes.link}>
-            Contact
-          </Link>
-          <Link to="/faq" className={classes.link}>
-            FAQ
-          </Link>
-        </div>
+        <Box>
+          {isMatch ? (
+            <>
+              <Typography
+                sx={{ fontSize: "2rem", paddingLeft: "10%" }}
+              ></Typography>
+              <DrawerComp />
+            </>
+          ) : (
+            <div style={{ display: "flex" }}>
+              <Tabs
+                style={{ marginRight: "30px", color: "black" }}
+                indicatorColor="secondary"
+                textColor="inherit"
+                value={value}
+                onChange={(e, value) => setValue(value)}
+              >
+                <Tab color="black" label="Acceuil" />
+                <Tab color="black" label="Espace Voitures" />
+                <Tab color="black" label="Espace Locataire" />
+                <Tab color="black" label="Espace Proprietaire" />
+              </Tabs>
+              <Button
+                style={{ backgroundColor: "#000", color: "white" }}
+                variant="contained"
+              >
+                Login
+              </Button>
+              <Button
+                style={{
+                  backgroundColor: "#000",
+                  color: "white",
+                  marginLeft: "10px",
+                }}
+                variant="contained"
+              >
+                SignUp
+              </Button>
+            </div>
+          )}
+        </Box>
       </Toolbar>
     </AppBar>
   );

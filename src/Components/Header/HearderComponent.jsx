@@ -17,13 +17,15 @@ import Categories from "../BodyComponent/Categories";
 import Reservations from "../BodyComponent/Reservations";
 import Footer from "../Footer";
 import Header from "./Header";
+import Locataire1 from "../Locataire/Locataire";
 
 export default function HearderComponent() {
   return (
     <Fragment>
-      <Header />
+      <NavbarComponent />
       <Switch>
         <Route exact path="/" render={() => <Acceuil />} />
+        <Route exact path="/Locataire/" render={() => <Locataire1 />} />
         <Route exact path="/Dashboard/" render={() => <Dashboard1 />} />
         <Route
           exact
