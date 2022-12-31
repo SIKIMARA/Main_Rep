@@ -1,10 +1,10 @@
 import React, { Fragment } from "react";
 import { useStyles } from "../BodyComponent/BodyStyles";
-import Sidenav from "../Header/Sidenav";
+import SideNavLocataire from "./SideNavLocataire";
 import { Box } from "@material-ui/core";
 import { Route, Switch } from "react-router-dom";
 import Locataire from "./Locataire";
-import Profile from "./Profile";
+import Historique from "./Historique";
 
 export default function Dashboard1() {
   const classes = useStyles();
@@ -18,7 +18,7 @@ export default function Dashboard1() {
   };
   return (
     <Fragment>
-      <Sidenav
+      <SideNavLocataire
         mobileOpen={mobileOpen}
         handleDrawerClose={handleDrawerClose}
         handleDrawerToggle={handleDrawerToggle}
@@ -31,7 +31,11 @@ export default function Dashboard1() {
             path="/Locataire/locataire"
             render={() => <Locataire />}
           />
-          <Route exact path="/Locataire/Profile" render={() => <Profile />} />
+          <Route
+            exact
+            path="/Locataire/Historique"
+            render={() => <Historique />}
+          />
         </Switch>
       </Box>
     </Fragment>
