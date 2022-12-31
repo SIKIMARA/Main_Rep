@@ -1,5 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 import { blue, blueGrey } from "@material-ui/core/colors";
+import { BorderColor } from "@material-ui/icons";
 
 export const useStyles = makeStyles((theme) => {
   console.log(theme.breakpoints);
@@ -11,6 +12,9 @@ export const useStyles = makeStyles((theme) => {
       borderRadius: "50%",
       color: "White",
       backgroundColor: "#dfc482",
+    },
+    logoBrand: {
+      margin: "8px",
     },
 
     //header
@@ -37,7 +41,7 @@ export const useStyles = makeStyles((theme) => {
       flexFlow: "row wrap",
       justifyContent: "space-between",
       position: "relative",
-      backgroundColor: "#dfc482",
+      backgroundColor: "#ffffff",
     },
     brandBox: {
       display: "flex",

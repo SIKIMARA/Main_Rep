@@ -89,6 +89,7 @@ export const useStyles = makeStyles((theme) => ({
   //footer
   footer: {
     padding: "8px 24px 16px 270px",
+    backgroundColor: "#dfc482",
     [theme.breakpoints.down("sm")]: {
       padding: "8px 24px 16px 24px",
     },

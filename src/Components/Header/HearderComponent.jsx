@@ -15,19 +15,13 @@ import Offres from "../BodyComponent/Offres";
 import Locataire from "../BodyComponent/Dashboard/Locataire";
 import Categories from "../BodyComponent/Categories";
 import Reservations from "../BodyComponent/Reservations";
-export default function HearderComponent() {
-  const classes = useStyles();
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+import Footer from "../Footer";
+import Header from "./Header";
 
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
-  const handleDrawerClose = () => {
-    setMobileOpen(false);
-  };
+export default function HearderComponent() {
   return (
     <Fragment>
-      <NavbarComponent handleDrawerToggle={handleDrawerToggle} />
+      <Header />
       <Switch>
         <Route exact path="/" render={() => <Acceuil />} />
         <Route exact path="/Dashboard/" render={() => <Dashboard1 />} />
@@ -65,6 +59,7 @@ export default function HearderComponent() {
           render={() => <Dashboard1 />}
         />
       </Switch>
+      <Footer></Footer>
     </Fragment>
   );
 }

@@ -6,7 +6,7 @@ import HearderComponent from "./Components/Header/HearderComponent";
 function App() {
   return (
     <BrowserRouter>
-      <HearderComponent />;
+      <HearderComponent />
     </BrowserRouter>
   );
 }
