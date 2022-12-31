@@ -73,7 +73,7 @@ const Details = () => {
           <Box>
             <Divider />
             <Typography
-              sx={{
+              style={{
                 fontSize: "35px",
                 color: "#000339",
                 fontWeight: "700",
@@ -84,7 +84,7 @@ const Details = () => {
             </Typography>
 
             <Typography
-              sx={{
+              style={{
                 fontSize: "16px",
                 color: "#5A6473",
                 lineHeight: "27px",
@@ -103,8 +103,14 @@ const Details = () => {
               alignItems: "center",
             }}
           >
-            <LargeText style={{ color: "#4f8030" }}>6+</LargeText>
-            <SmallText>Clients</SmallText>
+            <LargeText
+              style={{ color: "#4f8030", fontSize: "60px", fontWeight: "700" }}
+            >
+              6+
+            </LargeText>
+            <SmallText style={{ fontSize: "30px", fontWeight: "400" }}>
+              Clients
+            </SmallText>
           </Box>
 
           <Box
@@ -114,8 +120,14 @@ const Details = () => {
               alignItems: "center",
             }}
           >
-            <LargeText style={{ color: "#4f8030" }}>20+</LargeText>
-            <SmallText>Voitures</SmallText>
+            <LargeText
+              style={{ color: "#4f8030", fontSize: "60px", fontWeight: "700" }}
+            >
+              20+
+            </LargeText>
+            <SmallText style={{ fontSize: "30px", fontWeight: "400" }}>
+              Voitures
+            </SmallText>
           </Box>
           <Box
             sx={{
@@ -124,8 +136,14 @@ const Details = () => {
               alignItems: "center",
             }}
           >
-            <LargeText style={{ color: "#4f8030" }}>20+</LargeText>
-            <SmallText>Partenaires</SmallText>
+            <LargeText
+              style={{ color: "#4f8030", fontSize: "60px", fontWeight: "700" }}
+            >
+              20+
+            </LargeText>
+            <SmallText style={{ fontSize: "30px", fontWeight: "400" }}>
+              Partenaires
+            </SmallText>
           </Box>
 
           <Box
@@ -135,8 +153,14 @@ const Details = () => {
               alignItems: "center",
             }}
           >
-            <LargeText style={{ color: "#4f8030" }}>20+</LargeText>
-            <SmallText>branches</SmallText>
+            <LargeText
+              style={{ color: "#4f8030", fontSize: "60px", fontWeight: "700" }}
+            >
+              20+
+            </LargeText>
+            <SmallText style={{ fontSize: "30px", fontWeight: "400" }}>
+              Branches
+            </SmallText>
           </Box>
         </TextFlexbox>
       </Container>

@@ -39,7 +39,7 @@ const House = ({ img, proprietaire, address, marque, distance, prix }) => {
           <Proprietaire /> {proprietaire}
         </Typography>
         <Typography variant="body2" sx={{ my: 2 }}>
-          {address}
+          <span style={{ fontWeight: "700" }}>Adresse : </span> {address}
         </Typography>
 
         <Box
@@ -47,6 +47,7 @@ const House = ({ img, proprietaire, address, marque, distance, prix }) => {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
+            marginTop: "20px",
           }}
         >
           <InfoBox>

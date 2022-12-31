@@ -58,9 +58,9 @@ const Header = () => {
                 onChange={(e, value) => setValue(value)}
               >
                 <Tab label="Acceuil" />
-                <Tab label="Espace Voiture" />
-                <Tab label="Espace Locataire" />
-                <Tab label="Espace Proprietaire" />
+                <Tab label="Voitures" />
+                <Tab label="Locataire" />
+                <Tab label="Proprietd" />
               </Tabs>
               <Button
                 style={{ backgroundColor: "#000" }}

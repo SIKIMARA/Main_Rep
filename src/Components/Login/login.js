@@ -26,7 +26,7 @@ const Login = () => {
           width={160}
           style={{ marginTop: 10 }}
         />
-        <h2 style={{ color: "#dfc482" }}>Sign In</h2>
+        <h2 style={{ color: "#dfc482" }}>Login</h2>
       </Grid>
       <TextField
         color="#dfc482"
