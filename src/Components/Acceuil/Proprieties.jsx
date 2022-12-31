@@ -156,13 +156,12 @@ const Properties = () => {
           }}
         ></div>
 
-        <PropertiesBox style={{ backgroundColor: "#dfc482", padding: "30px" }}>
+        <PropertiesBox style={{ backgroundColor: "#f5c9cd", padding: "30px" }}>
           {
             <Carousel
               ref={carouselRef}
               enableAutoPlay
               showArrows={false}
-              itemPadding={[0, 10]}
               outerSpacing={30}
               autoPlaySpeed={3000}
               itemsToShow={3}

@@ -42,12 +42,26 @@ const properties = [
     disponibilité: true,
     couleur: "Red",
   },
+  {
+    id: "3",
+    img: house3,
+    proprietaire: "YASSINE BOUFNICHEL",
+    address:
+      "Street:  Port de tanger, 90000 \r City:   tanger \r State/province/area: tanger",
+    marque: "DACIA",
+    distance: 259526,
+    prix: "354000",
+    disponibilité: true,
+    couleur: "Red",
+  },
 ];
 const Listcars = () => {
   const PropertiesBox = styled(Box)(({ theme }) => ({
     display: "flex",
+    flexWrap: "wrap",
     justifyContent: "space-between",
     marginTop: theme.spacing(5),
+
     [theme.breakpoints.down("md")]: {
       flexDirection: "column",
       alignItems: "center",

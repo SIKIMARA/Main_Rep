@@ -5,6 +5,15 @@ import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import Proprietaire from "@mui/icons-material/Person4";
 import SpeedIcon from "@mui/icons-material/Speed";
 import InventoryIcon from "@mui/icons-material/Inventory";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import Card from "@material-ui/core/Card";
+import CardMedia from "@material-ui/core/CardMedia";
+import CardContent from "@material-ui/core/CardContent";
+
 import { Button } from "@material-ui/core";
 
 const Cars = ({
@@ -17,12 +26,20 @@ const Cars = ({
   disponibilité,
   couleur,
 }) => {
+  const [open, setOpen] = React.useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   const HouseBox = styled(Box)(({ theme }) => ({
     borderTopLeftRadius: "10px",
     borderTopRightRadius: "10px",
     maxWidth: 350,
     backgroundColor: "#fff",
-    margin: theme.spacing(0, 2, 0, 2),
+    margin: theme.spacing(2, 2, 2, 2),
     [theme.breakpoints.down("md")]: {
       margin: theme.spacing(2, 0, 2, 0),
     },
@@ -131,7 +148,141 @@ const Cars = ({
             </Typography>
           </InfoBox>
         </Box>
+        <Box
+          sx={{
+            display: "flex",
+            marginTop: "10px",
+            alignItems: "center",
+            justifyContent: "space-around",
+            alignContent: "center",
+          }}
+        >
+          <Button
+            onClick={handleClickOpen}
+            style={{
+              display: "flex",
+              margin: "10px 40%",
+              padding: "20px 70px",
+              backgroundColor: "#000000",
+              color: "#ffffff",
+              fontWeight: "bold",
+              fontSize: "15px",
+            }}
+          >
+            Reserver
+          </Button>
+        </Box>
       </Box>
+
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title" style={{ textAlign: "center" }}>
+          MARQUE : {marque}
+        </DialogTitle>
+        <DialogContent>
+          <Card>
+            <CardMedia
+              style={{ height: 200, width: 400 }}
+              image={img}
+              title={marque}
+            />
+            <CardContent style={{ display: "flex" }}>
+              <CardContent
+                style={{
+                  borderRight: "1px solid #dfc482",
+                  width: "70%",
+                }}
+              >
+                <Typography
+                  style={{
+                    fontSize: "17px",
+                    fontFamily: "poppins",
+                  }}
+                  variant="body2"
+                  color="textSecondary"
+                  component="p"
+                >
+                  <span style={{ color: "black", fontWeight: "400" }}>
+                    Distance:
+                  </span>{" "}
+                  {distance}KM
+                </Typography>
+                <Typography
+                  style={{
+                    fontSize: "17px",
+                    fontFamily: "poppins",
+                  }}
+                  variant="body2"
+                  color="textSecondary"
+                  component="p"
+                >
+                  <span style={{ color: "black", fontWeight: "400" }}>
+                    Couleur:
+                  </span>{" "}
+                  {couleur}
+                </Typography>
+
+                <Typography
+                  style={{
+                    fontSize: "17px",
+                    fontFamily: "poppins",
+                  }}
+                  variant="body2"
+                  color="textSecondary"
+                  component="p"
+                >
+                  <span style={{ color: "black", fontWeight: "400" }}>
+                    Propriétaire:
+                  </span>{" "}
+                  {proprietaire}
+                </Typography>
+                <Typography
+                  style={{
+                    fontSize: "23px",
+                    fontFamily: "poppins",
+                    color: "#5ba642",
+                    fontWeight: "500",
+                    textAlign: "center",
+                    marginTop: "10px",
+                  }}
+                  variant="body2"
+                  color="textSecondary"
+                  component="p"
+                >
+                  Prix: {prix} $
+                </Typography>
+              </CardContent>
+              <CardContent>
+                <Typography variant="body2" color="textSecondary" component="p">
+                  Paiment par espece :
+                </Typography>
+                <Button
+                  style={{
+                    backgroundColor: "#dfc482",
+                    color: "#ffffff",
+                    fontFamily: "poppins",
+
+                    fontWeight: "500",
+                    textAlign: "center",
+                    marginTop: "10px",
+                  }}
+                >
+                  RESERVER VOTRE VOITURE!!!!
+                </Button>
+              </CardContent>
+            </CardContent>
+          </Card>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Fermer
+          </Button>
+        </DialogActions>
+      </Dialog>
     </HouseBox>
   );
 };

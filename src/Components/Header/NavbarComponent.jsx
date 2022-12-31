@@ -39,7 +39,7 @@ const Header = () => {
         <Toolbar>
           <img
             src={locationVoiture}
-            style={{ width: "150px", height: "50px" }}
+            style={{ width: "150px", height: "50px", cursor: "pointer" }}
           />
           {isMatch ? (
             <>

@@ -11,6 +11,7 @@ const House = ({ img, proprietaire, address, marque, distance, prix }) => {
     borderTopLeftRadius: "10px",
     borderTopRightRadius: "10px",
     maxWidth: 350,
+    borderRadius: "20px",
     backgroundColor: "#fff",
     margin: theme.spacing(0, 2, 0, 2),
     [theme.breakpoints.down("md")]: {
@@ -31,11 +32,15 @@ const House = ({ img, proprietaire, address, marque, distance, prix }) => {
   return (
     <HouseBox>
       <ImgContainer>
-        <img src={img} alt="CarPhoto" style={{ maxWidth: "100%" }} />
+        <img
+          src={img}
+          alt="CarPhoto"
+          style={{ maxWidth: "100%", borderRadius: "20px 20px 0px 0px" }}
+        />
       </ImgContainer>
 
       <Box sx={{ padding: "1rem" }}>
-        <Typography variant="body2" sx={{ fontWeight: "700" }}>
+        <Typography variant="body2" style={{ fontWeight: "700" }}>
           <Proprietaire /> {proprietaire}
         </Typography>
         <Typography variant="body2" sx={{ my: 2 }}>
@@ -64,7 +69,7 @@ const House = ({ img, proprietaire, address, marque, distance, prix }) => {
             </Typography>
           </InfoBox>
 
-          <InfoBox>
+          <InfoBox style={{ color: "#66b54c" }}>
             <MonetizationOnIcon />
             <Typography variant="body2" sx={{ mt: 1 }}>
               {prix}

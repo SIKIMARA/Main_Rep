@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import Grid from '@material-ui/core/Grid';
+import React, { useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -36,19 +36,19 @@ function CarRegistrationForm() {
   const validate = () => {
     const newErrors = {};
     if (!formData.brand) {
-      newErrors.brand = 'Brand is required';
+      newErrors.brand = "Brand is required";
     }
     if (!formData.categorie) {
-      newErrors.categorie = 'Category is required';
+      newErrors.categorie = "Category is required";
     }
     if (!formData.kilometrage) {
-      newErrors.kilometrage = 'Kilometrage is required';
+      newErrors.kilometrage = "Kilometrage is required";
     }
     if (!formData.price) {
-      newErrors.price = 'Price is required';
+      newErrors.price = "Price is required";
     }
     if (!formData.color) {
-      newErrors.color = 'Color is required';
+      newErrors.color = "Color is required";
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -63,27 +63,32 @@ function CarRegistrationForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{
-        width:'100%x',
-    }}>
-      <Grid container spacing={2}
+    <form
+      onSubmit={handleSubmit}
       style={{
-        width:'36%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '100%',
-        marginLeft:'30%',
-        marginRight:'30%',
-        marginBottom:'30px',
-    }}
+        width: "100%x",
+      }}
+    >
+      <Grid
+        container
+        spacing={2}
+        style={{
+          width: "36%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "100%",
+          marginLeft: "30%",
+          marginRight: "30%",
+          marginBottom: "30px",
+        }}
       >
-        <Grid item xs={12} >
+        <Grid item xs={12}>
           <TextField
             name="brand"
             label="Brand"
             fullWidth
-            value={formData.brand || ''}
+            value={formData.brand || ""}
             onChange={handleChange}
             error={Boolean(errors.brand)}
             helperText={errors.brand}
@@ -95,7 +100,7 @@ function CarRegistrationForm() {
             <Select
               labelId="categorie  -select-label"
               name="categorie"
-              value={formData.categorie || ''}
+              value={formData.categorie || ""}
               onChange={handleChange}
               error={Boolean(errors.categorie)}
             >
@@ -113,7 +118,7 @@ function CarRegistrationForm() {
             name="kilometrage"
             label="Kilometrage"
             fullWidth
-            value={formData.kilometrage || ''}
+            value={formData.kilometrage || ""}
             onChange={handleChange}
             error={Boolean(errors.kilometrage)}
             helperText={errors.kilometrage}
@@ -124,7 +129,7 @@ function CarRegistrationForm() {
             name="price"
             label="Price"
             fullWidth
-            value={formData.price || ''}
+            value={formData.price || ""}
             onChange={handleChange}
             error={Boolean(errors.price)}
             helperText={errors.price}
@@ -135,20 +140,23 @@ function CarRegistrationForm() {
             name="color"
             label="Color"
             fullWidth
-            value={formData.color || ''}
+            value={formData.color || ""}
             onChange={handleChange}
             error={Boolean(errors.color)}
             helperText={errors.color}
           />
         </Grid>
-        
+
         <Grid item xs={12}>
           <Button
             type="submit"
             variant="contained"
-            
             className={classes.submitButton}
-            style={{backgroundColor:'#dfc832',width:'100px',marginLeft:'36%'}}
+            style={{
+              backgroundColor: "#dfc832",
+              width: "100px",
+              marginLeft: "36%",
+            }}
           >
             Submit
           </Button>
@@ -159,4 +167,3 @@ function CarRegistrationForm() {
 }
 
 export default CarRegistrationForm;
-

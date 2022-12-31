@@ -4,7 +4,6 @@ import Listcars from "./Listcars";
 import FilterBar from "./filter";
 import CarRegistrationForm from "./AjouterVoiture";
 
-
 export default function Voiture() {
   return (
     <div style={{ backgroundColor: "#faf1d9", paddingTop: "60px" }}>
@@ -19,16 +18,11 @@ export default function Voiture() {
         }}
       >
         ESPACE VOITURE
-
-        
       </div>
       <div>
-      <FilterBar />
+        <FilterBar />
       </div>
       <Listcars />
-      <div>
-        <CarRegistrationForm />
-      </div>
     </div>
   );
 }

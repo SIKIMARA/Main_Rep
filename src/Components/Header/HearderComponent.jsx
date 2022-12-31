@@ -19,6 +19,7 @@ import Footer from "../Footer";
 import Header from "./Header";
 import Locataire1 from "../Locataire/Locataire1";
 import Voiture from "../Voiture/Voiture";
+import Proprietaire1 from "../Proprietaire/Proprietaire1";
 
 export default function HearderComponent() {
   return (
@@ -27,7 +28,18 @@ export default function HearderComponent() {
       <Switch>
         <Route exact path="/" render={() => <Acceuil />} />
         <Route exact path="/Locataire/" render={() => <Locataire1 />} />
+        <Route exact path="/Proprietaire/" render={() => <Proprietaire1 />} />
         <Route exact path="/Voitures/" render={() => <Voiture />} />
+        <Route
+          exact
+          path="/Proprietaire/Historique"
+          render={() => <Proprietaire1 />}
+        />
+        <Route
+          exact
+          path="/Proprietaire/Voitures"
+          render={() => <Proprietaire1 />}
+        />
         <Route
           exact
           path="/Locataire/Historique"
