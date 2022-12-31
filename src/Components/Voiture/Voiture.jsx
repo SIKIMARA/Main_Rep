@@ -4,7 +4,7 @@ import Listcars from "./Listcars";
 
 export default function Voiture() {
   return (
-    <div style={{ backgroundColor: "#faf1d9" }}>
+    <div style={{ backgroundColor: "#faf1d9", paddingTop: "60px" }}>
       <div
         className="title"
         style={{
