@@ -60,7 +60,7 @@ const Header = () => {
                 <Tab label="Acceuil" />
                 <Tab label="Voitures" />
                 <Tab label="Locataire" />
-                <Tab label="Proprietaire" />
+                <Tab label="Proprietd" />
               </Tabs>
               <Button
                 style={{ backgroundColor: "#000" }}
@@ -68,7 +68,7 @@ const Header = () => {
                 variant="contained"
                 onClick={handleClickOpen}
               >
-                Login
+                Log
               </Button>
               <Button
                 style={{ backgroundColor: "#000" }}

@@ -5,28 +5,30 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
 import image from "../../Images/handa.jpeg";
+import UserCard from "./UserCard";
 const useStyles = makeStyles({});
 export default function Locataire() {
   const classes = useStyles();
   return (
-    <div>
+    <div style={{ display: "flex" }}>
       <Card
         style={{
-          margin: 30,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           alignContent: "center",
           textAlign: "center",
+          width: "50%",
         }}
         className={classes.root}
       >
         <CardContent>
           <div
             style={{
-              fontSize: "60px",
+              fontSize: "20px",
               fontFamily: "poppins",
-              margin: "20px 0px",
+
+              margin: " 0px",
               color: "#dfc482",
             }}
           >
@@ -39,7 +41,7 @@ export default function Locataire() {
           />
           <Typography
             style={{
-              fontSize: "40px",
+              fontSize: "20px",
               fontFamily: "poppins",
               margin: "10px 0px",
             }}
@@ -50,7 +52,7 @@ export default function Locataire() {
           </Typography>
           <Typography
             style={{
-              fontSize: "30px",
+              fontSize: "20px",
               fontFamily: "poppins",
             }}
             className={classes.pos}
@@ -63,7 +65,7 @@ export default function Locataire() {
           </Typography>
           <Typography
             style={{
-              fontSize: "30px",
+              fontSize: "20px",
               fontFamily: "poppins",
             }}
             className={classes.pos}
@@ -73,7 +75,7 @@ export default function Locataire() {
           </Typography>
           <Typography
             style={{
-              fontSize: "30px",
+              fontSize: "20px",
             }}
             className={classes.pos}
             color="textSecondary"
@@ -82,6 +84,7 @@ export default function Locataire() {
           </Typography>
         </CardContent>
       </Card>
+      <UserCard />
     </div>
   );
 }

@@ -4,9 +4,19 @@ import CarIcon from "@mui/icons-material/DirectionsCarFilled";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import Proprietaire from "@mui/icons-material/Person4";
 import SpeedIcon from "@mui/icons-material/Speed";
+import InventoryIcon from "@mui/icons-material/Inventory";
 import { Button } from "@material-ui/core";
 
-const House = ({ img, proprietaire, address, marque, distance, prix }) => {
+const Cars = ({
+  img,
+  proprietaire,
+  address,
+  marque,
+  distance,
+  prix,
+  disponibilité,
+  couleur,
+}) => {
   const HouseBox = styled(Box)(({ theme }) => ({
     borderTopLeftRadius: "10px",
     borderTopRightRadius: "10px",
@@ -29,7 +39,7 @@ const House = ({ img, proprietaire, address, marque, distance, prix }) => {
   }));
 
   return (
-    <HouseBox>
+    <HouseBox style={{ fontFamily: "poppins", fontWeight: "400" }}>
       <ImgContainer>
         <img src={img} alt="CarPhoto" style={{ maxWidth: "100%" }} />
       </ImgContainer>
@@ -59,15 +69,44 @@ const House = ({ img, proprietaire, address, marque, distance, prix }) => {
           <InfoBox>
             <SpeedIcon />
             <Typography variant="body2" sx={{ mt: 1 }}>
-              {distance}
+              {distance} km
             </Typography>
           </InfoBox>
 
           <InfoBox>
             <MonetizationOnIcon />
             <Typography variant="body2" sx={{ mt: 1 }}>
-              {prix}
+              {prix} $
             </Typography>
+          </InfoBox>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            margin: "10px",
+            alignItems: "center",
+            justifyContent: "space-around",
+            alignContent: "center",
+          }}
+        >
+          <InfoBox>
+            <InventoryIcon />
+            <Typography variant="body2" sx={{ mt: 1 }}>
+              {disponibilité ? "disponible" : "indisponible"}
+            </Typography>
+          </InfoBox>
+          <InfoBox>
+            Color
+            <Box
+              variant="body2"
+              sx={{
+                mt: 1,
+                backgroundColor: couleur,
+                borderRadius: "20px",
+                height: "20px",
+                width: "20px",
+              }}
+            ></Box>
           </InfoBox>
         </Box>
       </Box>
@@ -75,4 +114,4 @@ const House = ({ img, proprietaire, address, marque, distance, prix }) => {
   );
 };
 
-export default House;
+export default Cars;

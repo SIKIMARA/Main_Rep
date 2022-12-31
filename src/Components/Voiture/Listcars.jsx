@@ -1,9 +1,9 @@
 import { Box, Container, styled, Typography } from "@mui/material";
 import React from "react";
-import House from "./House";
-import house1 from "./image/slider-3.jpg";
-import house2 from "./image/slider-2.jpg";
-import house3 from "./image/slider-1.jpg";
+
+import house2 from "../Acceuil/image/slider-2.jpg";
+import house3 from "../Acceuil/image/slider-1.jpg";
+import Cars from "./Cars";
 const properties = [
   {
     id: "1",
@@ -14,6 +14,8 @@ const properties = [
     marque: "MERCEDES",
     distance: 255697,
     prix: "488000",
+    disponibilité: true,
+    couleur: "Red",
   },
   {
     id: "2",
@@ -24,6 +26,8 @@ const properties = [
     marque: "MERCEDES",
     distance: 255697,
     prix: "488000",
+    disponibilité: true,
+    couleur: "Red",
   },
 
   {
@@ -35,9 +39,11 @@ const properties = [
     marque: "DACIA",
     distance: 259526,
     prix: "354000",
+    disponibilité: true,
+    couleur: "Red",
   },
 ];
-const Properties = () => {
+const Listcars = () => {
   const PropertiesBox = styled(Box)(({ theme }) => ({
     display: "flex",
     justifyContent: "space-between",
@@ -57,38 +63,9 @@ const Properties = () => {
   return (
     <Box sx={{ mt: 5, backgroundColor: "#fcf0cc", py: 10, padding: "30px" }}>
       <Container>
-        <div
-          style={{
-            width: "5%",
-            height: "5px",
-            backgroundColor: "#4f8030",
-            margin: "0 auto",
-          }}
-        ></div>
-
-        <Typography
-          variant="h3"
-          sx={{
-            fontSize: "60px",
-            fontWeight: "bold",
-            color: "#0000000",
-            textAlign: "center",
-          }}
-        >
-          Offres
-        </Typography>
-        <div
-          style={{
-            width: "5%",
-            height: "5px",
-            backgroundColor: "#4f8030",
-            margin: "0 auto",
-          }}
-        ></div>
-
         <PropertiesBox>
           {properties.map((property) => (
-            <House
+            <Cars
               key={property.id}
               img={property.img}
               proprietaire={property.proprietaire}
@@ -96,6 +73,8 @@ const Properties = () => {
               marque={property.marque}
               distance={property.distance}
               prix={property.prix}
+              disponibilité={property.disponibilité}
+              couleur={property.couleur}
             />
           ))}
         </PropertiesBox>
@@ -104,4 +83,4 @@ const Properties = () => {
   );
 };
 
-export default Properties;
+export default Listcars;

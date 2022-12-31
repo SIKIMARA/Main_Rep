@@ -54,7 +54,7 @@ const Login = () => {
         style={btnstyle}
         fullWidth
       >
-        Sign in
+        Login
       </Button>
 
       <Typography>

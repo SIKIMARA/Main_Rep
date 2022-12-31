@@ -18,6 +18,7 @@ import Reservations from "../BodyComponent/Reservations";
 import Footer from "../Footer";
 import Header from "./Header";
 import Locataire1 from "../Locataire/Locataire1";
+import Voiture from "../Voiture/Voiture";
 
 export default function HearderComponent() {
   return (
@@ -26,6 +27,7 @@ export default function HearderComponent() {
       <Switch>
         <Route exact path="/" render={() => <Acceuil />} />
         <Route exact path="/Locataire/" render={() => <Locataire1 />} />
+        <Route exact path="/Voitures/" render={() => <Voiture />} />
         <Route
           exact
           path="/Locataire/Historique"

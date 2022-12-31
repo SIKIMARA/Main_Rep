@@ -1,57 +1,46 @@
 import React, { useState } from "react";
 import {
   AppBar,
-  Toolbar,
-  CssBaseline,
-  Typography,
-  makeStyles,
-  Box,
+  Button,
   Tab,
   Tabs,
-  Button,
+  Toolbar,
+  Typography,
   useMediaQuery,
   useTheme,
-} from "@material-ui/core";
-import { Link } from "react-router-dom";
+} from "@mui/material";
+import Dialog from "@material-ui/core/Dialog";
+import AddBusinessRoundedIcon from "@mui/icons-material/AddBusinessRounded";
 import locationVoiture from "../../Images/transparentvw.png";
-import LanguageSwitch from "./LanguageSwitch";
+import DialogActions from "@material-ui/core/DialogActions";
+
+import DialogContent from "@material-ui/core/DialogContent";
+import SignInOutContainer from "../Login/index";
 import DrawerComp from "./DrawerComp";
-
-const useStyles = makeStyles((theme) => ({
-  logo: {
-    flexGrow: "1",
-    cursor: "pointer",
-  },
-  toolbar: {},
-  logoBrand: { margin: "5px" },
-}));
-
-function Navbar() {
+const Header = () => {
   const [value, setValue] = useState();
-  const classes = useStyles();
   const theme = useTheme();
+  console.log(theme);
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
+  console.log(isMatch);
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
-    <AppBar position="static">
-      <CssBaseline />
-      <Toolbar
-        style={{
-          backgroundColor: "white",
-          display: "flex",
-          justifyContent: "space-between",
-        }}
-        className={classes.toolbar}
-      >
-        <Box
-          className={classes.logoBrand}
-          component="img"
-          src={locationVoiture}
-          sx={{
-            height: 60,
-            width: 150,
-          }}
-        ></Box>
-        <Box>
+    <React.Fragment>
+      <AppBar sx={{ background: "#ffffff" }}>
+        <Toolbar>
+          <img
+            src={locationVoiture}
+            style={{ width: "150px", height: "50px" }}
+          />
           {isMatch ? (
             <>
               <Typography
@@ -60,40 +49,51 @@ function Navbar() {
               <DrawerComp />
             </>
           ) : (
-            <div style={{ display: "flex" }}>
+            <>
               <Tabs
-                style={{ marginRight: "30px", color: "black" }}
+                sx={{ marginLeft: "auto", color: "black" }}
                 indicatorColor="secondary"
                 textColor="inherit"
                 value={value}
                 onChange={(e, value) => setValue(value)}
               >
-                <Tab color="black" label="Acceuil" />
-                <Tab color="black" label="Espace Voitures" />
-                <Tab color="black" label="Espace Locataire" />
-                <Tab color="black" label="Espace Proprietaire" />
+                <Tab label="Acceuil" />
+                <Tab label="Espace Voiture" />
+                <Tab label="Espace Locataire" />
+                <Tab label="Espace Proprietaire" />
               </Tabs>
               <Button
-                style={{ backgroundColor: "#000", color: "white" }}
+                style={{ backgroundColor: "#000" }}
+                sx={{ marginLeft: "auto" }}
                 variant="contained"
+                onClick={handleClickOpen}
               >
                 Login
               </Button>
               <Button
-                style={{
-                  backgroundColor: "#000",
-                  color: "white",
-                  marginLeft: "10px",
-                }}
+                style={{ backgroundColor: "#000" }}
+                sx={{ marginLeft: "10px" }}
                 variant="contained"
+                onClick={handleClickOpen}
               >
                 SignUp
               </Button>
-            </div>
+              <Dialog open={open} onClose={handleClose}>
+                <DialogContent>
+                  <SignInOutContainer />
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleClose} color="primary">
+                    Close
+                  </Button>
+                </DialogActions>
+              </Dialog>
+            </>
           )}
-        </Box>
-      </Toolbar>
-    </AppBar>
+        </Toolbar>
+      </AppBar>
+    </React.Fragment>
   );
-}
-export default Navbar;
+};
+
+export default Header;
