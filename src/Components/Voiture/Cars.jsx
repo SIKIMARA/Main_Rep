@@ -56,6 +56,7 @@ const Cars = ({
           sx={{
             display: "flex",
             alignItems: "center",
+            marginTop: "10px",
             justifyContent: "space-between",
           }}
         >
@@ -79,22 +80,6 @@ const Cars = ({
               {prix} $
             </Typography>
           </InfoBox>
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            margin: "10px",
-            alignItems: "center",
-            justifyContent: "space-around",
-            alignContent: "center",
-          }}
-        >
-          <InfoBox>
-            <InventoryIcon />
-            <Typography variant="body2" sx={{ mt: 1 }}>
-              {disponibilité ? "disponible" : "indisponible"}
-            </Typography>
-          </InfoBox>
           <InfoBox>
             Color
             <Box
@@ -107,6 +92,43 @@ const Cars = ({
                 width: "20px",
               }}
             ></Box>
+          </InfoBox>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            marginTop: "10px",
+            alignItems: "center",
+            justifyContent: "space-around",
+            alignContent: "center",
+          }}
+        >
+          <InfoBox>
+            <Typography variant="body2" sx={{ mt: 1 }}>
+              {disponibilité ? (
+                <span
+                  style={{
+                    padding: "3px",
+                    backgroundColor: "green",
+                    color: "white",
+                    borderRadius: "5px",
+                  }}
+                >
+                  disponible
+                </span>
+              ) : (
+                <span
+                  style={{
+                    padding: "3px",
+                    backgroundColor: "red",
+                    color: "white",
+                    borderRadius: "5px",
+                  }}
+                >
+                  indisponible
+                </span>
+              )}
+            </Typography>
           </InfoBox>
         </Box>
       </Box>
