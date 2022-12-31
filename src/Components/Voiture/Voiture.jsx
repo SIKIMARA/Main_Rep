@@ -1,6 +1,9 @@
 import React from "react";
 import Cars from "./Cars";
 import Listcars from "./Listcars";
+import FilterBar from "./filter";
+import CarRegistrationForm from "./AjouterVoiture";
+
 
 export default function Voiture() {
   return (
@@ -16,8 +19,16 @@ export default function Voiture() {
         }}
       >
         ESPACE VOITURE
+
+        
+      </div>
+      <div>
+      <FilterBar />
       </div>
       <Listcars />
+      <div>
+        <CarRegistrationForm />
+      </div>
     </div>
   );
 }
