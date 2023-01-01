@@ -22,7 +22,6 @@ export default function Voiture() {
       <div>
         <FilterBar />
       </div>
-      <Listcars />
     </div>
   );
 }

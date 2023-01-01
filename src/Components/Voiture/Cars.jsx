@@ -38,7 +38,7 @@ const Cars = ({
     borderTopLeftRadius: "10px",
     borderTopRightRadius: "10px",
     maxWidth: 350,
-    backgroundColor: "#fff",
+    backgroundColor: "#fce9bb",
     margin: theme.spacing(2, 2, 2, 2),
     [theme.breakpoints.down("md")]: {
       margin: theme.spacing(2, 0, 2, 0),
@@ -66,6 +66,7 @@ const Cars = ({
           <Proprietaire /> {proprietaire}
         </Typography>
         <Typography variant="body2" sx={{ my: 2 }}>
+          <span style={{ fontWeight: "700" }}>Adresse : </span>
           {address}
         </Typography>
 

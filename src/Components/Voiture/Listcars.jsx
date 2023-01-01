@@ -75,25 +75,9 @@ const Listcars = () => {
   }));
 
   return (
-    <Box sx={{ mt: 5, backgroundColor: "#fcf0cc", py: 10, padding: "30px" }}>
-      <Container>
-        <PropertiesBox>
-          {properties.map((property) => (
-            <Cars
-              key={property.id}
-              img={property.img}
-              proprietaire={property.proprietaire}
-              address={property.address}
-              marque={property.marque}
-              distance={property.distance}
-              prix={property.prix}
-              disponibilité={property.disponibilité}
-              couleur={property.couleur}
-            />
-          ))}
-        </PropertiesBox>
-      </Container>
-    </Box>
+    <Box
+      sx={{ mt: 5, backgroundColor: "#fcf0cc", py: 10, padding: "30px" }}
+    ></Box>
   );
 };
 
