@@ -13,7 +13,7 @@ import ArrowDropUpIcon from "@material-ui/icons/ArrowDropUp";
 import { useStyles } from "../BodyStyles";
 import GraphComponent from "../../../Common/GraphComponent";
 import BlogGraph from "./BlogGraph";
-import Section3 from "./Section3";
+
 import { fakeArrayGenrator } from "../../../Common/fakeDataGenetator";
 import { PageHeader } from "../../../Common/Components";
 
@@ -21,28 +21,35 @@ export default function Dashboard() {
   const classes = useStyles();
   const [hasFetched, setHasFetched] = useState(false);
 
+  const data = {
+    nbrClient: 40,
+    nbrReservation: 50,
+    nbrReclamation: 5,
+    nbrVoiture: 10,
+  };
+
   const DisplayData = [
     {
-      label: "Post",
-      value: "2,390",
+      label: "Clients",
+      value: data.nbrClient,
       icon: <ArrowDropUpIcon />,
       iconLabel: "7%",
     },
     {
-      label: "Pages",
-      value: "180",
+      label: "Reservations",
+      value: data.nbrReservation,
       icon: <ArrowDropUpIcon />,
       iconLabel: "5.3%",
     },
     {
-      label: "New Visitor",
-      value: "450",
+      label: "Reclamations",
+      value: data.nbrReclamation,
       icon: <ArrowDropDownIcon />,
       iconLabel: "4.1%",
     },
     {
-      label: "Total Visitor",
-      value: "37450",
+      label: "Voitures",
+      value: data.nbrVoiture,
       icon: <ArrowDropDownIcon />,
       iconLabel: "2.5%",
     },
@@ -50,25 +57,25 @@ export default function Dashboard() {
 
   const GraphData = [
     {
-      label: "Post",
+      label: "Clients",
       data: fakeArrayGenrator({ length: 10, digit: 100 }),
       bgColor: lightBlue[50],
       brColor: blue["A200"],
     },
     {
-      label: "Pages",
+      label: "Reservations",
       data: fakeArrayGenrator({ length: 10, digit: 100 }),
       bgColor: blue[50],
       brColor: blue["A700"],
     },
     {
-      label: "New Visitor",
+      label: "Reclamations",
       data: fakeArrayGenrator({ length: 10, digit: 100 }),
       bgColor: green[50],
       brColor: green["A400"],
     },
     {
-      label: "Total Visitor",
+      label: "Voitures",
       data: fakeArrayGenrator({ length: 10, digit: 100 }),
       bgColor: teal[50],
       brColor: teal["A400"],
@@ -141,7 +148,6 @@ export default function Dashboard() {
 
       {/* section blog graph  */}
       <BlogGraph />
-      <Section3 />
     </Box>
   );
 }

@@ -37,9 +37,9 @@ const properties = [
     address:
       "Street:  Port de fes, 90000 \r City:   fes \r State/province/area: fes",
     marque: "MERCEDES",
-    distance: 255697,
-    prix: "488000",
-    disponibilité: true,
+    distance: 25564,
+    prix: 488000,
+    disponibilité: false,
     couleur: "Red",
   },
   {
@@ -49,8 +49,8 @@ const properties = [
     address:
       "Street:  Port de fes, 90000 \r City:   fes \r State/province/area: fes",
     marque: "MERCEDES",
-    distance: 255697,
-    prix: "488000",
+    distance: 25,
+    prix: 80000,
     disponibilité: true,
     couleur: "Red",
   },
@@ -62,20 +62,20 @@ const properties = [
     address:
       "Street:  Port de tanger, 90000 \r City:   tanger \r State/province/area: tanger",
     marque: "DACIA",
-    distance: 259526,
-    prix: "354000",
+    distance: 25,
+    prix: 354000,
     disponibilité: true,
     couleur: "Red",
   },
   {
-    id: "3",
+    id: "4",
     img: house3,
     proprietaire: "YASSINE BOUFNICHEL",
     address:
       "Street:  Port de tanger, 90000 \r City:   tanger \r State/province/area: tanger",
     marque: "DACIA",
     distance: 259526,
-    prix: "354000",
+    prix: 35000,
     disponibilité: true,
     couleur: "Red",
   },
@@ -101,15 +101,43 @@ const PropertiesTextBox = styled(Box)(({ theme }) => ({
   },
 }));
 const FilterBar = () => {
-  const [value, setValue] = React.useState([10, 100]);
+  const [value, setValue] = React.useState([0, 100]);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  };
+  const [marque, setMarque] = React.useState("");
+
+  const handleMarqueChange = (event) => {
+    setMarque(event.target.value);
+  };
+  const [Proprietaire, setProprietaire] = React.useState("");
+
+  const handleProprietaireChange = (event) => {
+    setProprietaire(event.target.value);
+  };
+  const [Coleur, setColeur] = React.useState("");
+
+  const handleColeurChange = (event, newValue) => {
+    setColeur(event.target.value);
+  };
+  const [Disponible, setDisponible] = React.useState(true);
+
+  const handleDisponibleChange = (event, newValue) => {
+    setDisponible(event.target.value);
+  };
+  const [category, setCategory] = React.useState("");
+
+  const handleCategoryChange = (event, newValue) => {
+    setCategory(event.target.value);
   };
   const [valuePrice, setValuePrice] = React.useState([0, 100]);
 
-  const handleChangePrice = (event, newValue) => {
-    setValuePrice(newValue);
+  const handleChangePrice = (event) => {
+    setValuePrice(event.target.value);
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
   };
   return (
     <div
@@ -129,118 +157,129 @@ const FilterBar = () => {
       >
         <FilterAltIcon /> FILTER
       </div>
-      <div style={{ display: "flex", justifyContent: "space-around" }}>
-        <FormControl style={{ width: "220px" }}>
-          <InputLabel id="category-label">Category</InputLabel>
-          <Select
-            labelId="category-label"
-            id="category"
-            /* value={category}*/
-            //  onChange={handleCategoryChange}
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value="suv">SUV</MenuItem>
-            <MenuItem value="sedan">Sedan</MenuItem>
-            <MenuItem value="truck">Truck</MenuItem>
-          </Select>
-        </FormControl>
-        <FormControl style={{ width: "220px" }}>
-          <InputLabel id="brand-label">Brand</InputLabel>
-          <Select
-            labelId="brand-label"
-            id="brand"
-            //  value={brand}
-            //  onChange={handleBrandChange}
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value="ford">Ford</MenuItem>
-            <MenuItem value="toyota">Toyota</MenuItem>
-            <MenuItem value="chevy">Chevy</MenuItem>
-          </Select>
-        </FormControl>
+      <form onSubmit={handleSubmit}>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <FormControl style={{ width: "220px" }}>
+            <InputLabel id="brand-label">Marque</InputLabel>
+            <Select
+              labelId="brand-label"
+              id="brand"
+              value={marque}
+              onChange={handleMarqueChange}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              <MenuItem value="DACIA">DACIA</MenuItem>
+              <MenuItem value="toyota">Toyota</MenuItem>
+              <MenuItem value="chevy">Chevy</MenuItem>
+            </Select>
+          </FormControl>
 
-        <FormControl style={{ width: "220px" }}>
-          <InputLabel id="brand-label">Coleur</InputLabel>
-          <Select
-            labelId="Km"
-            id="Km"
-            //  value={price}
-            //  onChange={handlePriceChange}
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem>red</MenuItem>
-            <MenuItem>White</MenuItem>
-            <MenuItem>Black</MenuItem>
-          </Select>
-        </FormControl>
-      </div>
-      <div style={{ display: "flex", justifyContent: "space-around" }}>
-        <div style={{ width: "300px", margin: "20px" }}>
-          <Typography
-            gutterBottom
-            style={{ textAlign: "center", fontWeight: "700" }}
-          >
-            Price (x1000) :
-          </Typography>
-          <Slider
-            getAriaLabel={() => "Price range"}
-            value={valuePrice}
-            onChange={handleChangePrice}
-            valueLabelDisplay="auto"
-            getAriaValueText={valuetext}
-            sx={{ width: "300px", color: "#dfc482" }}
-          />
+          <FormControl style={{ width: "220px" }}>
+            <InputLabel id="brand-label">Coleur</InputLabel>
+            <Select labelId="Km" id="Km" onChange={handleColeurChange}>
+              <MenuItem value="Red">red</MenuItem>
+              <MenuItem value="White">White</MenuItem>
+              <MenuItem value="Black">Black</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl style={{ width: "220px" }}>
+            <InputLabel id="brand-label">Proprietaire</InputLabel>
+            <Select labelId="Km" id="Km" onChange={handleProprietaireChange}>
+              <MenuItem value="YASSINE BOUFNICHEL">YASSINE BOUFNICHEL</MenuItem>
+              <MenuItem value="ELMAJDOUBY">ELMAJDOUBY</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl style={{ width: "220px" }}>
+            <InputLabel id="brand-label">Disponibilité</InputLabel>
+            <Select labelId="Km" id="Km" onChange={handleDisponibleChange}>
+              <MenuItem value={true}>disponible</MenuItem>
+              <MenuItem value={false}>indisponible</MenuItem>
+            </Select>
+          </FormControl>
+        </div>
+        <div style={{ display: "flex", justifyContent: "space-around" }}>
+          <div style={{ width: "300px", margin: "20px" }}>
+            <Typography
+              gutterBottom
+              style={{ textAlign: "center", fontWeight: "700" }}
+            >
+              Price (x1000) :
+            </Typography>
+            <Slider
+              getAriaLabel={() => "Price range"}
+              value={valuePrice}
+              onChange={handleChangePrice}
+              valueLabelDisplay="auto"
+              getAriaValueText={valuetext}
+              sx={{ width: "300px", color: "#dfc482" }}
+            />
+          </div>
+
+          <div style={{ width: "300px", margin: "20px" }}>
+            <Typography
+              gutterBottom
+              style={{ textAlign: "center", fontWeight: "700" }}
+            >
+              KILOMETRAGE(x100) :
+            </Typography>
+            <Slider
+              getAriaLabel={() => "Price range"}
+              value={value}
+              onChange={handleChange}
+              valueLabelDisplay="auto"
+              getAriaValueText={valuetext}
+              sx={{ width: "300px", color: "#dfc482" }}
+            />
+          </div>
         </div>
 
-        <div style={{ width: "300px", margin: "20px" }}>
-          <Typography
-            gutterBottom
-            style={{ textAlign: "center", fontWeight: "700" }}
-          >
-            KILOMETRAGE(x100) :
-          </Typography>
-          <Slider
-            getAriaLabel={() => "Price range"}
-            value={value}
-            onChange={handleChange}
-            valueLabelDisplay="auto"
-            getAriaValueText={valuetext}
-            sx={{ width: "300px", color: "#dfc482" }}
-          />
-        </div>
-      </div>
-
-      <Button
-        style={{
-          backgroundColor: "#dfc482",
-          color: "#ffffff",
-          textAlign: "center",
-          margin: "20px 50%",
-        }}
-      >
-        Filter
-      </Button>
+        <Button
+          type="submit"
+          style={{
+            backgroundColor: "#dfc482",
+            color: "#ffffff",
+            textAlign: "center",
+            margin: "20px 50%",
+          }}
+        >
+          Filter
+        </Button>
+      </form>
       <Container>
         <PropertiesBox>
-          {properties.map((property) => (
-            <Cars
-              key={property.id}
-              img={property.img}
-              proprietaire={property.proprietaire}
-              address={property.address}
-              marque={property.marque}
-              distance={property.distance}
-              prix={property.prix}
-              disponibilité={property.disponibilité}
-              couleur={property.couleur}
-            />
-          ))}
+          {properties.map((property) => {
+            console.log(valuePrice);
+            if (
+              property.couleur ===
+                (Coleur.length === 0 ? property.couleur : Coleur) &&
+              property.marque ===
+                (marque.length === 0 ? property.marque : marque) &&
+              property.proprietaire ===
+                (Proprietaire.length === 0
+                  ? property.proprietaire
+                  : Proprietaire) &&
+              property.disponibilité == Disponible &&
+              valuePrice[0] * 10000 < property.prix &&
+              valuePrice[1] * 10000 > property.prix &&
+              value[0] * 10000 < property.distance &&
+              value[1] * 10000 > property.distance
+            )
+              return (
+                <Cars
+                  key={property.id}
+                  img={property.img}
+                  proprietaire={property.proprietaire}
+                  address={property.address}
+                  marque={property.marque}
+                  distance={property.distance}
+                  prix={property.prix}
+                  disponibilité={property.disponibilité}
+                  couleur={property.couleur}
+                />
+              );
+          })}
         </PropertiesBox>
       </Container>
     </div>

@@ -37,7 +37,7 @@ const Cars = ({
   const HouseBox = styled(Box)(({ theme }) => ({
     borderTopLeftRadius: "10px",
     borderTopRightRadius: "10px",
-    maxWidth: 350,
+    maxWidth: 320,
     backgroundColor: "#fce9bb",
     margin: theme.spacing(2, 2, 2, 2),
     [theme.breakpoints.down("md")]: {

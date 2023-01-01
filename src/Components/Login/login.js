@@ -16,7 +16,10 @@ import Checkbox from "@material-ui/core/Checkbox";
 const Login = () => {
   const avatarStyle = { backgroundColor: "#1bbd7e" };
   const btnstyle = { margin: "8px 0", backgroundColor: "#dfc482" };
-
+  const SubmitTest = () => {
+    localStorage.setItem("role", "111");
+    localStorage.setItem("roe", "22");
+  };
   return (
     <Paper style={{ width: 350, padding: 20 }}>
       <Grid align="center">
@@ -52,6 +55,7 @@ const Login = () => {
         color="primary"
         variant="contained"
         style={btnstyle}
+        onClick={SubmitTest}
         fullWidth
       >
         Login

@@ -41,7 +41,7 @@ const properties = [
     prix: "354000",
   },
   {
-    id: "3",
+    id: "4",
     img: house3,
     proprietaire: "YASSINE BOUFNICHEL",
     address:
@@ -51,7 +51,7 @@ const properties = [
     prix: "354000",
   },
   {
-    id: "3",
+    id: "5",
     img: house3,
     proprietaire: "YASSINE BOUFNICHEL",
     address:
@@ -61,7 +61,7 @@ const properties = [
     prix: "354000",
   },
   {
-    id: "3",
+    id: "6",
     img: house3,
     proprietaire: "YASSINE BOUFNICHEL",
     address:
@@ -71,7 +71,7 @@ const properties = [
     prix: "354000",
   },
   {
-    id: "3",
+    id: "7",
     img: house3,
     proprietaire: "YASSINE BOUFNICHEL",
     address:
@@ -81,7 +81,7 @@ const properties = [
     prix: "354000",
   },
   {
-    id: "3",
+    id: "8",
     img: house3,
     proprietaire: "YASSINE BOUFNICHEL",
     address:
@@ -163,7 +163,7 @@ const Properties = () => {
               enableAutoPlay
               showArrows={false}
               outerSpacing={30}
-              autoPlaySpeed={3000}
+              autoPlaySpeed={1000}
               itemsToShow={3}
               onNextEnd={({ index }) => {
                 clearTimeout(3000);
