@@ -9,6 +9,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
@@ -39,6 +40,14 @@ const Cars = ({
 
   const handleClose = () => {
     setOpen(false);
+  };
+  const [open2, setOpen2] = React.useState(false);
+  const handleClickOpen2 = () => {
+    setOpen2(true);
+  };
+
+  const handleClose2 = () => {
+    setOpen2(false);
   };
   const HouseBox = styled(Box)(({ theme }) => ({
     borderTopLeftRadius: "10px",
@@ -168,20 +177,22 @@ const Cars = ({
             alignContent: "center",
           }}
         >
-          <Button
-            onClick={handleClickOpen}
-            style={{
-              display: "flex",
-              margin: "10px 40%",
-              padding: "20px 70px",
-              backgroundColor: "#000000",
-              color: "#ffffff",
-              fontWeight: "bold",
-              fontSize: "15px",
-            }}
-          >
-            Reserver
-          </Button>
+          {localStorage.getItem("role") === "locataire" ? (
+            <Button
+              onClick={handleClickOpen}
+              style={{
+                display: "flex",
+                margin: "10px 40%",
+                padding: "20px 70px",
+                backgroundColor: "#000000",
+                color: "#ffffff",
+                fontWeight: "bold",
+                fontSize: "15px",
+              }}
+            >
+              Reserver
+            </Button>
+          ) : null}
         </Box>
       </Box>
 
@@ -196,16 +207,15 @@ const Cars = ({
         </DialogTitle>
         <DialogContent>
           <Card>
-            <ImgContainer
-              style={{
-                backgroundImage: `url(${image2}))`,
-
-                width: "100%",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-                height: "250px",
-              }}
-            ></ImgContainer>
+            <ImgContainer>
+              <ImgContainer>
+                <img
+                  src={image2}
+                  style={{ width: "100%", height: "250px" }}
+                  alt=""
+                />
+              </ImgContainer>
+            </ImgContainer>
             <CardContent style={{ display: "flex" }}>
               <CardContent
                 style={{
@@ -281,14 +291,25 @@ const Cars = ({
                     backgroundColor: "#dfc482",
                     color: "#ffffff",
                     fontFamily: "poppins",
-
                     fontWeight: "500",
                     textAlign: "center",
                     marginTop: "10px",
                   }}
+                  onClick={handleClickOpen2}
                 >
                   RESERVER VOTRE VOITURE!!!!
                 </Button>
+                <Dialog open={open2} onClose={handleClose2}>
+                  <DialogContent>
+                    <CheckCircleIcon style={{ color: "green" }} /> Reservation
+                    Successfull
+                  </DialogContent>
+                  <DialogActions>
+                    <Button onClick={handleClose2} color="primary">
+                      Fermer
+                    </Button>
+                  </DialogActions>
+                </Dialog>
               </CardContent>
             </CardContent>
           </Card>

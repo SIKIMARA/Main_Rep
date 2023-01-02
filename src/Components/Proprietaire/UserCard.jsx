@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -33,18 +33,48 @@ const useStyles = makeStyles({
 export default function UserCard(props) {
   const classes = useStyles();
   const { avatarUrl } = props;
-  const [nom, setNom] = useState(props.nom);
-  const [prenom, setPrenom] = useState(props.prenom);
-  const [adress, setAdress] = useState(props.adress);
+  const [nomm, setNom] = useState(props.nom);
+  const [adresss, setAdress] = useState(props.adress);
   const [tele, setTele] = useState(props.tele);
-  const [email, setEmail] = useState(props.email);
-  const [password, setPassword] = useState(props.password);
-
+  const [emaill, setEmail] = useState(props.email);
+  const [defaultNom, setDefaultName] = useState(props.nom);
   const handleSubmit = (event) => {
     event.preventDefault();
-    // submit the form here
+    const userData = {
+      id: localStorage.getItem("id"),
+      name: nomm,
+      adress: adresss,
+      phoneNumber: tele,
+      email: emaill,
+    };
+    updateUser(userData);
   };
 
+  async function updateUser(userData) {
+    //console id
+    console.log(userData);
+    try {
+      localStorage.setItem("name", userData.name);
+      localStorage.setItem("adress", userData.adress);
+      localStorage.setItem("phone", userData.phoneNumber);
+      localStorage.setItem("email", userData.email);
+      const response = await fetch(
+        `https://localhost:7047/api/Admin/UpdateUser/${userData.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userData),
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
   return (
     <form onSubmit={handleSubmit}>
       <Card className={classes.root}>
@@ -72,51 +102,44 @@ export default function UserCard(props) {
           <TextField
             label="Nom"
             style={{ width: "400px" }}
-            value={nom}
+            defaultValue={localStorage.getItem("name")}
+            value={nomm}
             onChange={(event) => setNom(event.target.value)}
-          />
-
-          <TextField
-            label="Prénom"
-            value={prenom}
-            style={{ width: "400px" }}
-            onChange={(event) => setPrenom(event.target.value)}
-          />
-          <TextField
-            label="Password"
-            value={password}
-            style={{ width: "400px" }}
-            onChange={(event) => setPassword(event.target.value)}
           />
           <TextField
             label="Adresse"
-            value={adress}
+            value={adresss}
+            defaultValue={localStorage.getItem("adress")}
             style={{ width: "400px" }}
             onChange={(event) => setAdress(event.target.value)}
           />
           <TextField
             label="Téléphone"
             value={tele}
+            defaultValue={localStorage.getItem("phone")}
             style={{ width: "400px" }}
             onChange={(event) => setTele(event.target.value)}
           />
           <TextField
             label="Email"
-            value={email}
+            value={emaill}
             style={{ width: "400px" }}
+            defaultValue={localStorage.getItem("email")}
             onChange={(event) => setEmail(event.target.value)}
           />
           <Button
             type="submit"
             variant="contained"
+            onClick={updateUser}
+            //onClick={() => { window.location.reload();}}
             style={{
               backgroundColor: "#1d4701",
               color: "white",
               margin: "30px",
+              cursor: "pointer",
             }}
-            disabled={!nom || !prenom || !adress || !tele || !email}
           >
-            Envoyer
+            Update
           </Button>
         </CardContent>
       </Card>

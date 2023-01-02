@@ -142,7 +142,7 @@ const Details = () => {
               20+
             </LargeText>
             <SmallText style={{ fontSize: "30px", fontWeight: "400" }}>
-              Partenaires
+              Reservations
             </SmallText>
           </Box>
 
@@ -159,7 +159,7 @@ const Details = () => {
               20+
             </LargeText>
             <SmallText style={{ fontSize: "30px", fontWeight: "400" }}>
-              Branches
+              Marques
             </SmallText>
           </Box>
         </TextFlexbox>

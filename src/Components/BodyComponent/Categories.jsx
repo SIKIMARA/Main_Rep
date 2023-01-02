@@ -11,60 +11,33 @@ export default function Categories() {
   const defaultMaterialTheme = createTheme();
   const [tableData, setTableData] = useState([
     {
-      Nom: "BOUGARRANI",
-      Prenom: "IDRISS",
-      Tel: 7894561230,
-      Age: 18,
-
-      Adress: "Fes",
+      Id: "1",
+      Name: "sportive",
     },
     {
-      Nom: "BOUFNICHEL",
-      Prenom: "YASSINE",
-      Tel: 156561262,
-      Age: 28,
-      Adress: "SEFROU",
+      Id: "2",
+      Name: "hybride",
     },
   ]);
   const columns = [
     {
-      title: "Nom",
-      field: "Nom",
-      sorting: false,
-      filtering: false,
+      title: "Id",
+      field: "Id",
+      sorting: true,
+      filtering: true,
+      filterPlaceholder: "filter",
       cellStyle: { background: "#dfc482" },
       headerStyle: { color: "#fff" },
     },
     {
-      title: "Prenom",
-      field: "Prenom",
-      sorting: false,
-      filtering: false,
+      title: "nom Categorie",
+      field: "Name",
+      sorting: true,
+      filtering: true,
+      filterPlaceholder: "filter",
       cellStyle: { background: "#dfc482" },
       headerStyle: { color: "#fff" },
     },
-
-    { title: "Tel", field: "Tel", align: "center", grouping: false },
-    {
-      title: "Age",
-      field: "Age",
-      emptyValue: () => <em>null</em>,
-      render: (rowData) => (
-        <div
-          style={{
-            background: rowData.age >= 18 ? "#008000aa" : "#f90000aa",
-            borderRadius: "4px",
-            paddingLeft: 5,
-          }}
-        >
-          {rowData.age >= 18 ? "18+" : "18-"}
-        </div>
-      ),
-      searchable: false,
-      export: false,
-    },
-
-    { title: "Adress", field: "Adress", filterPlaceholder: "filter" },
   ];
   return (
     <div className="App">

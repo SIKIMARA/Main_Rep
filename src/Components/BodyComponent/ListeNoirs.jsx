@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MaterialTable from "material-table";
 import GetAppIcon from "@material-ui/icons/GetApp";
 import AddIcon from "@material-ui/icons/Add";
@@ -7,64 +7,77 @@ import { ThemeProvider, createTheme } from "@mui/material";
 import SentimentVeryDissatisfiedIcon from "@material-ui/icons/SentimentVeryDissatisfied";
 import HelpIcon from "@material-ui/icons/Help";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import axios from "axios";
 export default function ListeNoirs() {
   const defaultMaterialTheme = createTheme();
-  const [tableData, setTableData] = useState([
-    {
-      Nom: "BOUGARRANI",
-      Prenom: "IDRISS",
-      Tel: 7894561230,
-      Age: 18,
+  const [tableData, setTableData] = useState([]);
 
-      Adress: "Fes",
-    },
-    {
-      Nom: "BOUFNICHEL",
-      Prenom: "YASSINE",
-      Tel: 156561262,
-      Age: 28,
-      Adress: "SEFROU",
-    },
-  ]);
+  const [selected, setSelected] = useState([]);
+
+  useEffect(() => {
+    fetch("https://localhost:7047/api/Admin/ListeNoir")
+      .then((resp) => resp.json())
+      .then((resp) => {
+        console.log(tableData);
+        setTableData(resp);
+      });
+  }, []);
+
   const columns = [
     {
       title: "Nom",
-      field: "Nom",
-      sorting: false,
-      filtering: false,
+      field: "name",
+      sorting: true,
+      filtering: true,
+      filterPlaceholder: "filter",
       cellStyle: { background: "#dfc482" },
       headerStyle: { color: "#fff" },
     },
     {
       title: "Prenom",
-      field: "Prenom",
-      sorting: false,
-      filtering: false,
+      field: "firstName",
+      sorting: true,
+      filtering: true,
+      filterPlaceholder: "filter",
       cellStyle: { background: "#dfc482" },
       headerStyle: { color: "#fff" },
     },
-
-    { title: "Tel", field: "Tel", align: "center", grouping: false },
     {
-      title: "Age",
-      field: "Age",
-      emptyValue: () => <em>null</em>,
-      render: (rowData) => (
-        <div
-          style={{
-            background: rowData.age >= 18 ? "#008000aa" : "#f90000aa",
-            borderRadius: "4px",
-            paddingLeft: 5,
-          }}
-        >
-          {rowData.age >= 18 ? "18+" : "18-"}
-        </div>
-      ),
-      searchable: false,
-      export: false,
+      title: "Addresse",
+      field: "adress",
+      sorting: true,
+      filtering: true,
+      filterPlaceholder: "filter",
+      cellStyle: { background: "#dfc482" },
+      headerStyle: { color: "#fff" },
     },
-
-    { title: "Adress", field: "Adress", filterPlaceholder: "filter" },
+    {
+      title: "telephone",
+      field: "phoneNumber",
+      sorting: true,
+      filtering: true,
+      filterPlaceholder: "filter",
+      cellStyle: { background: "#dfc482" },
+      headerStyle: { color: "#fff" },
+    },
+    {
+      title: "Mail",
+      field: "email",
+      sorting: true,
+      filtering: true,
+      filterPlaceholder: "filter",
+      cellStyle: { background: "#dfc482" },
+      headerStyle: { color: "#fff" },
+    },
+    {
+      title: "Role",
+      field: "role",
+      sorting: true,
+      filtering: true,
+      filterPlaceholder: "filter",
+      cellStyle: { background: "#dfc482" },
+      headerStyle: { color: "#fff" },
+    },
   ];
   return (
     <div className="App">
@@ -83,16 +96,30 @@ export default function ListeNoirs() {
               new Promise((resolve, reject) => {
                 const updatedData = [...tableData];
                 updatedData[oldRow.tableData.id] = newRow;
+
+                console.log(oldRow.idUser);
+
                 setTableData(updatedData);
                 setTimeout(() => resolve(), 500);
               }),
             onRowDelete: (selectedRow) =>
               new Promise((resolve, reject) => {
-                const updatedData = [...tableData];
-                updatedData.splice(selectedRow.tableData.id, 1);
-                setTableData(updatedData);
+                async function handleDelete() {
+                  console.log(selectedRow);
+                }
+                handleDelete();
                 setTimeout(() => resolve(), 1000);
               }),
+          }}
+          onSelectionChange={(selectedRows) => {
+            const selectedItems = selectedRows.map((row) => ({
+              nom: row.nom,
+              prenom: row.prenom,
+              idLocataire: row.idUser,
+            }));
+            setSelected(selectedItems);
+
+            // console.log(selected.idLocataire)
           }}
           actions={[
             {
@@ -114,7 +141,6 @@ export default function ListeNoirs() {
               //isFreeAction: true,
             },
           ]}
-          onSelectionChange={(selectedRows) => console.log(selectedRows)}
           options={{
             sorting: true,
             search: true,

@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MaterialTable from "material-table";
 import GetAppIcon from "@material-ui/icons/GetApp";
 import AddIcon from "@material-ui/icons/Add";
@@ -9,62 +9,68 @@ import HelpIcon from "@material-ui/icons/Help";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 export default function Reservations() {
   const defaultMaterialTheme = createTheme();
+
   const [tableData, setTableData] = useState([
     {
-      Nom: "BOUGARRANI",
-      Prenom: "IDRISS",
-      Tel: 7894561230,
-      Age: 18,
-
-      Adress: "Fes",
-    },
-    {
-      Nom: "BOUFNICHEL",
-      Prenom: "YASSINE",
-      Tel: 156561262,
-      Age: 28,
-      Adress: "SEFROU",
+      Matricule_voiture: "euiorqwewe",
+      Nom_Locataire: "Mouhsin",
+      Date_Reservation: "12/08/2022",
+      Date_Retour: "12/09/2022",
+      Montant: "1234",
     },
   ]);
+
+  useEffect(() => {
+    fetch("https://localhost:7047/api/Locataire/AllReservations")
+      .then((resp) => resp.json())
+      .then((resp) => {
+        console.log(tableData);
+        setTableData(resp);
+      });
+  }, []);
+
   const columns = [
     {
-      title: "Nom",
-      field: "Nom",
+      title: "Matricule Voiture",
+      field: "Matricule_voiture",
+      sorting: true,
+      filtering: true,
+      filterPlaceholder: "filter",
+      cellStyle: { background: "#dfc482" },
+      headerStyle: { color: "#fff" },
+    },
+    {
+      title: "Nom Locataire",
+      field: "Nom_Locataire",
       sorting: false,
       filtering: false,
       cellStyle: { background: "#dfc482" },
       headerStyle: { color: "#fff" },
     },
     {
-      title: "Prenom",
-      field: "Prenom",
+      title: "Date Reservation",
+      field: "Date_Reservation",
       sorting: false,
       filtering: false,
       cellStyle: { background: "#dfc482" },
       headerStyle: { color: "#fff" },
     },
-
-    { title: "Tel", field: "Tel", align: "center", grouping: false },
     {
-      title: "Age",
-      field: "Age",
-      emptyValue: () => <em>null</em>,
-      render: (rowData) => (
-        <div
-          style={{
-            background: rowData.age >= 18 ? "#008000aa" : "#f90000aa",
-            borderRadius: "4px",
-            paddingLeft: 5,
-          }}
-        >
-          {rowData.age >= 18 ? "18+" : "18-"}
-        </div>
-      ),
-      searchable: false,
-      export: false,
+      title: "Date Retour",
+      field: "Date_Retour",
+      sorting: false,
+      filtering: false,
+      cellStyle: { background: "#dfc482" },
+      headerStyle: { color: "#fff" },
     },
-
-    { title: "Adress", field: "Adress", filterPlaceholder: "filter" },
+    {
+      title: "Montant",
+      field: "Montant",
+      sorting: false,
+      filtering: false,
+      cellStyle: { background: "#dfc482" },
+      headerStyle: { color: "#fff" },
+    },
   ];
   return (
     <div className="App">

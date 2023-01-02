@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MaterialTable from "material-table";
 import GetAppIcon from "@material-ui/icons/GetApp";
 import AddIcon from "@material-ui/icons/Add";
@@ -7,147 +7,213 @@ import { ThemeProvider, createTheme } from "@mui/material";
 import SentimentVeryDissatisfiedIcon from "@material-ui/icons/SentimentVeryDissatisfied";
 import HelpIcon from "@material-ui/icons/Help";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import axios from "axios";
+import Authenticated from "../../Login/Authenticated";
+
 export default function Locataire() {
   const defaultMaterialTheme = createTheme();
-  const [tableData, setTableData] = useState([
-    {
-      Nom: "BOUGARRANI",
-      Prenom: "IDRISS",
-      Tel: 7894561230,
-      Age: 18,
+  const [tableData, setTableData] = useState([]);
 
-      Adress: "Fes",
-    },
-    {
-      Nom: "BOUFNICHEL",
-      Prenom: "YASSINE",
-      Tel: 156561262,
-      Age: 28,
-      Adress: "SEFROU",
-    },
-  ]);
+  const [selected, setSelected] = useState([]);
+
+  useEffect(() => {
+    fetch("https://localhost:7047/api/Admin/ListeUsers")
+      .then((resp) => resp.json())
+      .then((resp) => {
+        console.log(tableData);
+        setTableData(resp);
+      });
+  }, []);
+
   const columns = [
     {
       title: "Nom",
-      field: "Nom",
-      sorting: false,
-      filtering: false,
+      field: "name",
+      sorting: true,
+      filtering: true,
+      filterPlaceholder: "filter",
       cellStyle: { background: "#dfc482" },
       headerStyle: { color: "#fff" },
     },
     {
       title: "Prenom",
-      field: "Prenom",
-      sorting: false,
-      filtering: false,
+      field: "firstName",
+      sorting: true,
+      filtering: true,
+      filterPlaceholder: "filter",
       cellStyle: { background: "#dfc482" },
       headerStyle: { color: "#fff" },
     },
-
-    { title: "Tel", field: "Tel", align: "center", grouping: false },
     {
-      title: "Age",
-      field: "Age",
-      emptyValue: () => <em>null</em>,
-      render: (rowData) => (
-        <div
-          style={{
-            background: rowData.age >= 18 ? "#008000aa" : "#f90000aa",
-            borderRadius: "4px",
-            paddingLeft: 5,
-          }}
-        >
-          {rowData.age >= 18 ? "18+" : "18-"}
-        </div>
-      ),
-      searchable: false,
-      export: false,
+      title: "Addresse",
+      field: "adress",
+      sorting: true,
+      filtering: true,
+      filterPlaceholder: "filter",
+      cellStyle: { background: "#dfc482" },
+      headerStyle: { color: "#fff" },
     },
-
-    { title: "Adress", field: "Adress", filterPlaceholder: "filter" },
+    {
+      title: "telephone",
+      field: "phoneNumber",
+      sorting: true,
+      filtering: true,
+      filterPlaceholder: "filter",
+      cellStyle: { background: "#dfc482" },
+      headerStyle: { color: "#fff" },
+    },
+    {
+      title: "Mail",
+      field: "email",
+      sorting: true,
+      filtering: true,
+      filterPlaceholder: "filter",
+      cellStyle: { background: "#dfc482" },
+      headerStyle: { color: "#fff" },
+    },
+    {
+      title: "Role",
+      field: "role",
+      sorting: true,
+      filtering: true,
+      filterPlaceholder: "filter",
+      cellStyle: { background: "#dfc482" },
+      headerStyle: { color: "#fff" },
+    },
   ];
   return (
-    <div className="App">
-      <ThemeProvider theme={defaultMaterialTheme}>
-        <MaterialTable
-          columns={columns}
-          data={tableData}
-          editable={{
-            onRowAdd: (newRow) =>
-              new Promise((resolve, reject) => {
-                setTableData([...tableData, newRow]);
+    <Authenticated>
+      <div className="App">
+        <ThemeProvider theme={defaultMaterialTheme}>
+          <MaterialTable
+            columns={columns}
+            data={tableData}
+            editable={{
+              onRowUpdate: (newRow, oldRow) =>
+                new Promise((resolve, reject) => {
+                  console.log(oldRow.idUser);
+                  try {
+                    fetch(
+                      `https://localhost:7047/api/Admin/UpdateUser/${oldRow.idUser}`,
+                      {
+                        method: "PUT",
+                        body: JSON.stringify(newRow),
+                        headers: {
+                          "Content-Type": "application/json",
+                        },
+                      }
+                    )
+                      .then((response) => response.json())
+                      .then((data) => {
+                        console.log(data);
+                        // do something with the response data
+                      });
+                  } catch (error) {
+                    console.error(error);
+                  }
+                  setTimeout(() => resolve(), 500);
+                }),
+            }}
+            onSelectionChange={(selectedRows) => {
+              const selectedItems = selectedRows.map((row) => ({
+                nom: row.nom,
+                prenom: row.prenom,
+                idLocataire: row.idUser,
+              }));
+              setSelected(selectedItems);
 
-                setTimeout(() => resolve(), 500);
-              }),
-            onRowUpdate: (newRow, oldRow) =>
-              new Promise((resolve, reject) => {
-                const updatedData = [...tableData];
-                updatedData[oldRow.tableData.id] = newRow;
-                setTableData(updatedData);
-                setTimeout(() => resolve(), 500);
-              }),
-            onRowDelete: (selectedRow) =>
-              new Promise((resolve, reject) => {
-                const updatedData = [...tableData];
-                updatedData.splice(selectedRow.tableData.id, 1);
-                setTableData(updatedData);
-                setTimeout(() => resolve(), 1000);
-              }),
-          }}
-          actions={[
-            {
-              icon: () => <SentimentVeryDissatisfiedIcon />,
-              tooltip: "Liste noire",
-              onClick: (e, data) => console.log(data),
-              //isFreeAction: true,
-            },
-            {
-              icon: () => <FavoriteIcon />,
-              tooltip: "liste favoris",
-              onClick: (e, data) => console.log(data),
-              //isFreeAction: true,
-            },
-            {
-              icon: () => <HelpIcon />,
-              tooltip: "Probleme",
-              onClick: (e, data) => console.log(data),
-              //isFreeAction: true,
-            },
-          ]}
-          onSelectionChange={(selectedRows) => console.log(selectedRows)}
-          options={{
-            sorting: true,
-            search: true,
-            searchFieldAlignment: "right",
-            searchAutoFocus: true,
-            searchFieldVariant: "standard",
-            filtering: true,
-            paging: true,
+              //console.log(selected[0].idLocataire)
+            }}
+            actions={[
+              {
+                icon: () => <SentimentVeryDissatisfiedIcon />,
+                tooltip: "Liste noire",
+                onClick: () => {
+                  fetch(
+                    `https://localhost:7047/api/Admin/addToNoir/${selected[0].idLocataire}`,
+                    {
+                      method: "PUT",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify(selected[0]),
+                    }
+                  )
+                    .then((response) => response.json())
+                    .then((data) => {
+                      console.log("Success:", data);
+                    })
+                    .catch((error) => {
+                      console.error("Error:", error);
+                    });
+                },
+                //isFreeAction: true,
+              },
+              {
+                icon: () => <FavoriteIcon />,
+                tooltip: "liste favoris",
+                onClick: () => {
+                  fetch(
+                    `https://localhost:7047/api/Admin/addToFavori/${selected[0].idLocataire}`,
+                    {
+                      method: "PUT",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify(selected[0]),
+                    }
+                  )
+                    .then((response) => response.json())
+                    .then((data) => {
+                      console.log("Success:", data);
+                    })
+                    .catch((error) => {
+                      console.error("Error:", error);
+                    });
+                },
+                //isFreeAction: true,
+              },
+              {
+                icon: () => <HelpIcon />,
+                tooltip: "Probleme",
+                onClick: (e, data) => console.log(data),
+                //isFreeAction: true,
+              },
+            ]}
+            options={{
+              sorting: true,
+              search: true,
+              searchFieldAlignment: "right",
+              searchAutoFocus: true,
+              searchFieldVariant: "standard",
+              filtering: true,
+              paging: true,
 
-            pageSize: 5,
-            paginationType: "stepped",
-            showFirstLastPageButtons: false,
-            paginationPosition: "both",
-            exportButton: true,
+              pageSize: 5,
+              paginationType: "stepped",
+              showFirstLastPageButtons: false,
+              paginationPosition: "both",
+              exportButton: true,
 
-            exportAllData: true,
-            exportFileName: "TableData",
-            addRowPosition: "first",
-            actionsColumnIndex: -1,
-            selection: true,
-            showSelectAllCheckbox: true,
-            showTextRowsSelected: true,
+              exportAllData: true,
+              exportFileName: "TableData",
+              addRowPosition: "first",
+              actionsColumnIndex: -1,
+              selection: true,
+              showSelectAllCheckbox: true,
+              showTextRowsSelected: true,
 
-            grouping: true,
-            columnsButton: true,
-            rowStyle: (data, index) =>
-              index % 2 === 0 ? { background: "#f5f5f5" } : null,
-            headerStyle: { background: "#4d4020", color: "#fff" },
-          }}
-          title="Utilisateurs"
-          icons={{ Add: () => <AddIcon /> }}
-        />
-      </ThemeProvider>
-    </div>
+              grouping: true,
+              columnsButton: true,
+              rowStyle: (data, index) =>
+                index % 2 === 0 ? { background: "#f5f5f5" } : null,
+              headerStyle: { background: "#4d4020", color: "#fff" },
+            }}
+            title="Utilisateurs"
+            icons={{ Add: () => <AddIcon /> }}
+          />
+        </ThemeProvider>
+      </div>
+    </Authenticated>
   );
 }

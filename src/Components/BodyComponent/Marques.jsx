@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MaterialTable from "material-table";
 import GetAppIcon from "@material-ui/icons/GetApp";
 import AddIcon from "@material-ui/icons/Add";
@@ -24,6 +24,7 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
+import { Construction } from "@mui/icons-material";
 const useStyles = makeStyles({
   card: {
     maxWidth: 200,
@@ -77,63 +78,17 @@ export default function Marques() {
       logo: mercedes,
     },
   ];
-  const [tableData, setTableData] = useState([
-    {
-      Nom: "BOUGARRANI",
-      Prenom: "IDRISS",
-      Tel: 7894561230,
-      Age: 18,
+  const [tableData, setTableData] = useState([]);
 
-      Adress: "Fes",
-    },
-    {
-      Nom: "BOUFNICHEL",
-      Prenom: "YASSINE",
-      Tel: 156561262,
-      Age: 28,
-      Adress: "SEFROU",
-    },
-  ]);
-  const columns = [
-    {
-      title: "Nom",
-      field: "Nom",
-      sorting: false,
-      filtering: false,
-      cellStyle: { background: "#dfc482" },
-      headerStyle: { color: "#fff" },
-    },
-    {
-      title: "Prenom",
-      field: "Prenom",
-      sorting: false,
-      filtering: false,
-      cellStyle: { background: "#dfc482" },
-      headerStyle: { color: "#fff" },
-    },
+  useEffect(() => {
+    fetch("https://localhost:7047/api/Admin/ListeMarque")
+      .then((resp) => resp.json())
+      .then((resp) => {
+        console.log(resp);
+        setTableData(resp);
+      });
+  }, []);
 
-    { title: "Tel", field: "Tel", align: "center", grouping: false },
-    {
-      title: "Age",
-      field: "Age",
-      emptyValue: () => <em>null</em>,
-      render: (rowData) => (
-        <div
-          style={{
-            background: rowData.age >= 18 ? "#008000aa" : "#f90000aa",
-            borderRadius: "4px",
-            paddingLeft: 5,
-          }}
-        >
-          {rowData.age >= 18 ? "18+" : "18-"}
-        </div>
-      ),
-      searchable: false,
-      export: false,
-    },
-
-    { title: "Adress", field: "Adress", filterPlaceholder: "filter" },
-  ];
   return (
     <div className="App">
       <Grid container spacing={0}>
@@ -161,8 +116,14 @@ export default function Marques() {
       </Grid>
       <ThemeProvider theme={defaultMaterialTheme}>
         <MaterialTable
-          columns={columns}
-          data={tableData}
+          columns={[
+            { title: "Index", field: "index" },
+            { title: "Nom marque", field: "title" },
+          ]}
+          data={tableData.map((value, index) => ({
+            index: index + 1,
+            title: value,
+          }))}
           editable={{
             onRowAdd: (newRow) =>
               new Promise((resolve, reject) => {

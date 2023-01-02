@@ -25,14 +25,13 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import image from "../Acceuil/image/slider-4.jpg";
 
 export default function P_Voiture() {
-  const [urlPhoto, setImage] = React.useState("");
-  const [proprietaire, setProprietaire] = React.useState("");
   const [idMarque, setMarque] = React.useState("");
   const [idCategorie, setCategory] = React.useState("");
   const [nombrePassagers, setNombrePassager] = React.useState("");
   const [km, setKm] = React.useState("");
   const [prix, setPrice] = React.useState("");
   const [annee, setAnnee] = React.useState("");
+  const [couleur, setCouleur] = React.useState("");
   const [immatriculation, setImmatriculation] = React.useState("");
   const [dataa, setDataa] = useState(null);
   const [data, setData] = useState([]);
@@ -43,7 +42,7 @@ export default function P_Voiture() {
   const [menuItems, setMenuItems] = useState([]);
 
   const defaultMaterialTheme = createTheme();
-  const [url, setUrl] = useState("");
+  const [urlPhoto, setUrl] = useState("");
 
   useEffect(() => {
     // Make a request to the web API to fetch the menu items
@@ -92,8 +91,25 @@ export default function P_Voiture() {
       });
   }, []);
 
+  const Email = localStorage.getItem("email");
+  const [idProp, setIdProp] = useState("");
+
+  useEffect(() => {
+    // Make a request to the web API to fetch the menu items
+    axios
+      .get("https://localhost:7047/api/Admin/UserIDByEmail/" + Email)
+      .then((response) => {
+        // Extract the menu items from the data and store them in a state variable
+        console.log(response.data);
+        setIdProp(response.data);
+      });
+  }, []);
   async function handleSubmit(event) {
     event.preventDefault(); // Prevent the default form submission behavior
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      ["idProp"]: idProp,
+    }));
     try {
       // Make an HTTP request to the API to post the data
       await axios.post(
@@ -109,11 +125,14 @@ export default function P_Voiture() {
       // Handle any errors that occur during the request
       console.error(error);
     }
+    console.log(formData);
   }
 
-  const handleChange = (event) => {
+  function handleChange(event) {
     const { name, value } = event.target;
-    if (name === "image") {
+    var tmp = 0;
+    tmp = name === "urlPhoto" ? 1 : 0;
+    if (tmp === 1) {
       const file = event.target.files[0];
       let fr = new FileReader();
       fr.readAsDataURL(file);
@@ -123,26 +142,15 @@ export default function P_Voiture() {
           ...prevFormData,
           [name]: fr.result,
         }));
-        console.log(name, fr.result);
-        setUrl(fr.result);
       };
-    } else if (name === "marque") {
-      setMarque(value);
-    } else if (name === "category") {
-      setCategory(value);
-    } else if (name === "nombrePassager") {
-      setNombrePassager(value);
-    } else if (name === "km") {
-      setKm(value);
-    } else if (name === "price") {
-      setPrice(value);
-    } else if (name === "annee") {
-      setAnnee(value);
-    } else if (name === "Immatriculation") {
-      setImmatriculation(value);
+    } else {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [name]: value,
+      }));
     }
-  };
-  console.log(url);
+  }
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
@@ -168,14 +176,18 @@ export default function P_Voiture() {
           </label>
           <TextField
             type="file"
-            name="image"
+            name="urlPhoto"
             label="Image"
             onChange={handleChange}
           />
 
           <FormControl>
             <InputLabel>Marque</InputLabel>
-            <Select name="marque" value={idMarque} onChange={handleChange}>
+            <Select
+              name="idMarque"
+              value={formData.idMarque}
+              onChange={handleChange}
+            >
               <option value="">None</option>
               {menuItems.map((menuItem, index) => (
                 <MenuItem key={menuItem} value={index}>
@@ -187,7 +199,11 @@ export default function P_Voiture() {
 
           <FormControl>
             <InputLabel>Category</InputLabel>
-            <Select name="category" value={idCategorie} onChange={handleChange}>
+            <Select
+              name="idCategorie"
+              value={formData.idCategorie}
+              onChange={handleChange}
+            >
               <option value="">None</option>
               {CategorieItem.map((menuItem, index) => (
                 <MenuItem key={menuItem} value={index}>
@@ -198,27 +214,45 @@ export default function P_Voiture() {
           </FormControl>
           <TextField
             label="Nombre de passagers"
-            name="nombrePassager"
-            value={nombrePassagers}
+            name="nombrePassagers"
+            value={formData.nombrePassagers}
             onChange={handleChange}
           />
-          <TextField label="Km" name="km" value={km} onChange={handleChange} />
+          <TextField
+            label="Id Proprietaire"
+            name="idProp"
+            value={idProp}
+            defaultValue={idProp}
+            disabled={true}
+          />
+          <TextField
+            label="couleur"
+            name="couleur"
+            value={formData.couleur}
+            onChange={handleChange}
+          />
+          <TextField
+            label="Km"
+            name="km"
+            value={formData.km}
+            onChange={handleChange}
+          />
           <TextField
             label="Price"
-            name="price"
-            value={prix}
+            name="prix"
+            value={formData.prix}
             onChange={handleChange}
           />
           <TextField
             label="Année"
             name="annee"
-            value={annee}
+            value={formData.annee}
             onChange={handleChange}
           />
           <TextField
             label="Immatriculation"
-            name="Immatriculation"
-            value={immatriculation}
+            name="immatriculation"
+            value={formData.immatriculation}
             onChange={handleChange}
           />
           <Button
