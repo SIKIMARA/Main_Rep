@@ -13,13 +13,19 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
+import image from "../Acceuil/image/slider-2.jpg";
+
+import image5 from "../Acceuil/image/slider-4.jpg";
+import image6 from "../Acceuil/image/slider-5.jpg";
+import image7 from "../Acceuil/image/slider-1.jpg";
 
 import { Button } from "@material-ui/core";
 
 const Cars = ({
-  img,
+  image2,
   proprietaire,
-  address,
+  annee,
+  categorie,
   marque,
   distance,
   prix,
@@ -37,7 +43,7 @@ const Cars = ({
   const HouseBox = styled(Box)(({ theme }) => ({
     borderTopLeftRadius: "10px",
     borderTopRightRadius: "10px",
-    maxWidth: 320,
+    Width: "320px",
     backgroundColor: "#fce9bb",
     margin: theme.spacing(2, 2, 2, 2),
     [theme.breakpoints.down("md")]: {
@@ -58,7 +64,7 @@ const Cars = ({
   return (
     <HouseBox style={{ fontFamily: "poppins", fontWeight: "400" }}>
       <ImgContainer>
-        <img src={img} alt="CarPhoto" style={{ maxWidth: "100%" }} />
+        <img src={image2} style={{ width: "340px" }} alt="" />
       </ImgContainer>
 
       <Box sx={{ padding: "1rem" }}>
@@ -66,8 +72,12 @@ const Cars = ({
           <Proprietaire /> {proprietaire}
         </Typography>
         <Typography variant="body2" sx={{ my: 2 }}>
-          <span style={{ fontWeight: "700" }}>Adresse : </span>
-          {address}
+          <span style={{ fontWeight: "700" }}>Date D'Ajout : </span>
+          {annee}
+        </Typography>
+        <Typography variant="body2" sx={{ my: 2 }}>
+          <span style={{ fontWeight: "700" }}>Categorie : </span>
+          {categorie}
         </Typography>
 
         <Box
@@ -186,11 +196,16 @@ const Cars = ({
         </DialogTitle>
         <DialogContent>
           <Card>
-            <CardMedia
-              style={{ height: 200, width: 400 }}
-              image={img}
-              title={marque}
-            />
+            <ImgContainer
+              style={{
+                backgroundImage: `url(${image2}))`,
+
+                width: "100%",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                height: "250px",
+              }}
+            ></ImgContainer>
             <CardContent style={{ display: "flex" }}>
               <CardContent
                 style={{

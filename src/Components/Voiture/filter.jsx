@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   FormControl,
   InputLabel,
@@ -19,6 +19,7 @@ import {
 import house2 from "../Acceuil/image/slider-2.jpg";
 import house3 from "../Acceuil/image/slider-1.jpg";
 import Cars from "./Cars";
+import axios from "axios";
 const theme = createTheme({
   palette: {
     primary: {
@@ -139,6 +140,44 @@ const FilterBar = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
   };
+  const [menuItems, setMenuItems] = useState([]);
+  const [selectedMenuItem, setSelectedMenuItem] = useState(null);
+
+  useEffect(() => {
+    // Make a request to the web API to fetch the menu items
+    axios
+      .get("https://localhost:7047/api/admin/ListeMarque")
+      .then((response) => {
+        // Extract the menu items from the data and store them in a state variable
+        console.log(response.data);
+        setMenuItems(response.data);
+      });
+  }, []);
+  const [ProprietaireItem, setProprietaireItems] = useState([]);
+
+  useEffect(() => {
+    // Make a request to the web API to fetch the menu items
+    axios
+      .get("https://localhost:7047/api/Admin/listeNomProprietaire")
+      .then((response) => {
+        // Extract the menu items from the data and store them in a state variable
+        console.log(response.data);
+        setProprietaireItems(response.data);
+      });
+  }, []);
+  const [CarItem, setCarItems] = useState([]);
+
+  useEffect(() => {
+    // Make a request to the web API to fetch the menu items
+    axios
+      .get("https://localhost:7047/api/Admin/ListeVoiture")
+      .then((response) => {
+        // Extract the menu items from the data and store them in a state variable
+        console.log(response.data);
+        setCarItems(response.data);
+      });
+  }, []);
+
   return (
     <div
       style={{
@@ -170,15 +209,21 @@ const FilterBar = () => {
               <MenuItem value="">
                 <em>None</em>
               </MenuItem>
-              <MenuItem value="DACIA">DACIA</MenuItem>
-              <MenuItem value="toyota">Toyota</MenuItem>
-              <MenuItem value="chevy">Chevy</MenuItem>
+              {menuItems.map((menuItem) => (
+                <MenuItem key={menuItem} value={menuItem}>
+                  {menuItem}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
 
           <FormControl style={{ width: "220px" }}>
             <InputLabel id="brand-label">Coleur</InputLabel>
+
             <Select labelId="Km" id="Km" onChange={handleColeurChange}>
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
               <MenuItem value="Red">red</MenuItem>
               <MenuItem value="White">White</MenuItem>
               <MenuItem value="Black">Black</MenuItem>
@@ -187,8 +232,14 @@ const FilterBar = () => {
           <FormControl style={{ width: "220px" }}>
             <InputLabel id="brand-label">Proprietaire</InputLabel>
             <Select labelId="Km" id="Km" onChange={handleProprietaireChange}>
-              <MenuItem value="YASSINE BOUFNICHEL">YASSINE BOUFNICHEL</MenuItem>
-              <MenuItem value="ELMAJDOUBY">ELMAJDOUBY</MenuItem>
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
+              {ProprietaireItem.map((menuItem) => (
+                <MenuItem key={menuItem} value={menuItem}>
+                  {menuItem}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
           <FormControl style={{ width: "220px" }}>
@@ -249,33 +300,33 @@ const FilterBar = () => {
       </form>
       <Container>
         <PropertiesBox>
-          {properties.map((property) => {
-            console.log(valuePrice);
+          {CarItem.map((property) => {
             if (
               property.couleur ===
                 (Coleur.length === 0 ? property.couleur : Coleur) &&
-              property.marque ===
-                (marque.length === 0 ? property.marque : marque) &&
-              property.proprietaire ===
+              property.nomMarque ===
+                (marque.length === 0 ? property.nomMarque : marque) &&
+              property.iNomProprietaire ===
                 (Proprietaire.length === 0
-                  ? property.proprietaire
+                  ? property.iNomProprietaire
                   : Proprietaire) &&
-              property.disponibilité == Disponible &&
-              valuePrice[0] * 10000 < property.prix &&
-              valuePrice[1] * 10000 > property.prix &&
-              value[0] * 10000 < property.distance &&
-              value[1] * 10000 > property.distance
+              property.disponible == Disponible &&
+              valuePrice[0] * 100000 < property.prix &&
+              valuePrice[1] * 100000 > property.prix &&
+              value[0] * 100000 < property.km &&
+              value[1] * 100000 > property.km
             )
               return (
                 <Cars
                   key={property.id}
-                  img={property.img}
-                  proprietaire={property.proprietaire}
-                  address={property.address}
-                  marque={property.marque}
-                  distance={property.distance}
+                  image2={property.urlPhoto}
+                  proprietaire={property.iNomProprietaire}
+                  annee={property.annee}
+                  categorie={property.nomCategorie}
+                  marque={property.nomMarque}
+                  distance={property.km}
                   prix={property.prix}
-                  disponibilité={property.disponibilité}
+                  disponibilité={property.disponible}
                   couleur={property.couleur}
                 />
               );
