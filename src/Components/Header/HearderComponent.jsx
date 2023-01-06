@@ -20,6 +20,7 @@ import Header from "./Header";
 import Locataire1 from "../Locataire/Locataire1";
 import Voiture from "../Voiture/Voiture";
 import Proprietaire1 from "../Proprietaire/Proprietaire1";
+import Reclamation from "../Locataire/Reclamation";
 
 export default function HearderComponent() {
   return (
@@ -39,6 +40,11 @@ export default function HearderComponent() {
           exact
           path="/Proprietaire/Voitures"
           render={() => <Proprietaire1 />}
+        />
+        <Route
+          exact
+          path="/Locataire/Reclamations"
+          render={() => <Locataire1 />}
         />
         <Route
           exact

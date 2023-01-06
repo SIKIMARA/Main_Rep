@@ -190,7 +190,7 @@ export default function P_Voiture() {
             >
               <option value="">None</option>
               {menuItems.map((menuItem, index) => (
-                <MenuItem key={menuItem} value={index}>
+                <MenuItem key={menuItem} value={index + 1}>
                   {menuItem}
                 </MenuItem>
               ))}
@@ -206,7 +206,7 @@ export default function P_Voiture() {
             >
               <option value="">None</option>
               {CategorieItem.map((menuItem, index) => (
-                <MenuItem key={menuItem} value={index}>
+                <MenuItem key={menuItem} value={index + 1}>
                   {menuItem}
                 </MenuItem>
               ))}
@@ -274,14 +274,14 @@ export default function P_Voiture() {
         <thead>
           <tr>
             <th>urlPhoto</th>
-            <th>nombrePassagers</th>
-            <th>nomCategorie</th>
-            <th>nomMarque</th>
+            <th>nbPassagers</th>
+            <th>Categorie</th>
+            <th>Marque</th>
             <th>couleur</th>
             <th>prix</th>
             <th>annee</th>
             <th>km</th>
-            <th>immatriculation</th>
+            <th>matricule</th>
             <th>disponible</th>
             <th>Action</th>
           </tr>
@@ -321,7 +321,7 @@ export default function P_Voiture() {
                   style={{
                     backgroundColor: "Green",
                     color: "#ffffff",
-                    margin: "2px",
+                    margin: "10px 2px",
 
                     fontWeight: "700",
                     borderRadius: "5px",

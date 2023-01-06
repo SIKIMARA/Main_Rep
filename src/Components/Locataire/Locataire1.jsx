@@ -5,6 +5,7 @@ import { Box } from "@material-ui/core";
 import { Route, Switch } from "react-router-dom";
 import Locataire from "./Locataire";
 import Historique from "./Historique";
+import Reclamation from "./Reclamation";
 
 export default function Dashboard1() {
   const classes = useStyles();
@@ -35,6 +36,11 @@ export default function Dashboard1() {
             exact
             path="/Locataire/Historique"
             render={() => <Historique />}
+          />
+          <Route
+            exact
+            path="/Locataire/Reclamations"
+            render={() => <Reclamation />}
           />
         </Switch>
       </Box>

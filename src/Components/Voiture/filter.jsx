@@ -311,10 +311,10 @@ const FilterBar = () => {
                   ? property.iNomProprietaire
                   : Proprietaire) &&
               property.disponible == Disponible &&
-              valuePrice[0] * 100000 < property.prix &&
-              valuePrice[1] * 100000 > property.prix &&
-              value[0] * 100000 < property.km &&
-              value[1] * 100000 > property.km
+              valuePrice[0] * 100 < property.prix &&
+              valuePrice[1] * 100 > property.prix &&
+              value[0] * 100 < property.km &&
+              value[1] * 100 > property.km
             )
               return (
                 <Cars

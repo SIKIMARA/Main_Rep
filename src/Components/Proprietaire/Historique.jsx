@@ -11,60 +11,48 @@ export default function Historique() {
   const defaultMaterialTheme = createTheme();
   const [tableData, setTableData] = useState([
     {
-      Nom: "BOUGARRANI",
-      Prenom: "IDRISS",
-      Tel: 7894561230,
-      Age: 18,
-
-      Adress: "Fes",
+      Marque: "Dacia",
+      Category: "automatique",
+      Locataire: "YASSINE BOUFNICHEL",
+      DateReservation: "12/03/2002",
     },
     {
-      Nom: "BOUFNICHEL",
-      Prenom: "YASSINE",
-      Tel: 156561262,
-      Age: 28,
-      Adress: "SEFROU",
+      Marque: "Renault",
+      Category: "manuel",
+      Locataire: "YASSINE BOUFNICHEL",
+      DateReservation: "12/06/2002",
     },
   ]);
   const columns = [
     {
-      title: "Nom",
-      field: "Nom",
+      title: "Marque",
+      field: "Marque",
       sorting: false,
       filtering: false,
       cellStyle: { background: "#dfc482" },
       headerStyle: { color: "#fff" },
     },
     {
-      title: "Prenom",
-      field: "Prenom",
+      title: "Category",
+      field: "Category",
       sorting: false,
       filtering: false,
       cellStyle: { background: "#dfc482" },
       headerStyle: { color: "#fff" },
     },
 
-    { title: "Tel", field: "Tel", align: "center", grouping: false },
     {
-      title: "Age",
-      field: "Age",
-      emptyValue: () => <em>null</em>,
-      render: (rowData) => (
-        <div
-          style={{
-            background: rowData.age >= 18 ? "#008000aa" : "#f90000aa",
-            borderRadius: "4px",
-            paddingLeft: 5,
-          }}
-        >
-          {rowData.age >= 18 ? "18+" : "18-"}
-        </div>
-      ),
-      searchable: false,
-      export: false,
+      title: "Locataire",
+      field: "Locataire",
+      align: "center",
+      grouping: false,
     },
 
-    { title: "Adress", field: "Adress", filterPlaceholder: "filter" },
+    {
+      title: "DateReservation",
+      field: "DateReservation",
+      filterPlaceholder: "filter",
+    },
   ];
   return (
     <div className="App">
@@ -73,19 +61,6 @@ export default function Historique() {
           columns={columns}
           data={tableData}
           editable={{
-            onRowAdd: (newRow) =>
-              new Promise((resolve, reject) => {
-                setTableData([...tableData, newRow]);
-
-                setTimeout(() => resolve(), 500);
-              }),
-            onRowUpdate: (newRow, oldRow) =>
-              new Promise((resolve, reject) => {
-                const updatedData = [...tableData];
-                updatedData[oldRow.tableData.id] = newRow;
-                setTableData(updatedData);
-                setTimeout(() => resolve(), 500);
-              }),
             onRowDelete: (selectedRow) =>
               new Promise((resolve, reject) => {
                 const updatedData = [...tableData];
@@ -94,26 +69,6 @@ export default function Historique() {
                 setTimeout(() => resolve(), 1000);
               }),
           }}
-          actions={[
-            {
-              icon: () => <SentimentVeryDissatisfiedIcon />,
-              tooltip: "Liste noire",
-              onClick: (e, data) => console.log(data),
-              //isFreeAction: true,
-            },
-            {
-              icon: () => <FavoriteIcon />,
-              tooltip: "liste favoris",
-              onClick: (e, data) => console.log(data),
-              //isFreeAction: true,
-            },
-            {
-              icon: () => <HelpIcon />,
-              tooltip: "Probleme",
-              onClick: (e, data) => console.log(data),
-              //isFreeAction: true,
-            },
-          ]}
           onSelectionChange={(selectedRows) => console.log(selectedRows)}
           options={{
             sorting: true,
@@ -144,7 +99,7 @@ export default function Historique() {
               index % 2 === 0 ? { background: "#f5f5f5" } : null,
             headerStyle: { background: "#4d4020", color: "#fff" },
           }}
-          title="Utilisateurs"
+          title="Historique des reservation"
           icons={{ Add: () => <AddIcon /> }}
         />
       </ThemeProvider>

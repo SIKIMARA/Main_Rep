@@ -39,8 +39,6 @@ export default function SidenavDataProprietaire({ handleDrawerClose }) {
       link: "/Proprietaire/Voitures",
       icon: <DirectionsCarIcon />,
     },
-
-    { label: "logout", link: "/Proprietaire/logout", icon: <ExitToAppIcon /> },
   ];
 
   return (

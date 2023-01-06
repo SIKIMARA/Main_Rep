@@ -6,6 +6,7 @@ import { Route, Switch } from "react-router-dom";
 import Proprietaire from "./Proprietaire";
 import Historique from "./Historique";
 import P_Voiture from "./P_Voiture";
+import Reclamation from "../Locataire/Reclamation";
 
 export default function Proprietaire1() {
   const classes = useStyles();
@@ -41,6 +42,11 @@ export default function Proprietaire1() {
             exact
             path="/Proprietaire/Voitures"
             render={() => <P_Voiture />}
+          />
+          <Route
+            exact
+            path="/Proprietaire/Reclamations"
+            render={() => <Reclamation />}
           />
         </Switch>
       </Box>

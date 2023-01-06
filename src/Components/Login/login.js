@@ -41,6 +41,7 @@ const Login = () => {
         localStorage.setItem("role", response.data.role);
         if (response.data.role == "locataire")
           localStorage.setItem("id", response.data.idUser);
+        window.location.href = "/locataire";
         //proprietaire
         if (response.data.role == "proprietaire")
           localStorage.setItem("id", response.data.id);
@@ -48,6 +49,7 @@ const Login = () => {
         localStorage.setItem("name", response.data.name);
         localStorage.setItem("phone", response.data.phoneNumber);
         localStorage.setItem("address", response.data.adress);
+        window.location.href = "/proprietaire";
 
         // // Get the token from the response data
         // const token = response.data.token;
@@ -58,8 +60,10 @@ const Login = () => {
         // // Check for the presence of a valid token
         const storedToken = localStorage.getItem("role");
         // //if storedToken and response.data.roles[0] == "Admin" then redirect to admin dashboard
-        if (storedToken && response.data.role == "admin")
+        if (response.data.role == "admin") {
           window.location.href = "/Dashboard";
+          localStorage.setItem("id", response.data.id);
+        }
       })
       .catch((error) => {
         console.error(error);
@@ -111,7 +115,7 @@ const Login = () => {
           type="submit"
           color="primary"
           variant="contained"
-          //onClick={() => { window.location.reload();}}
+          onClick={() => {}}
           style={btnstyle}
           fullWidth
         >

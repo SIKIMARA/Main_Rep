@@ -28,6 +28,7 @@ import {
   MenuItem,
   Select,
 } from "@material-ui/core";
+import axios from "axios";
 const Header = () => {
   const history = useHistory();
   const [value, setValue] = useState();
@@ -39,7 +40,10 @@ const Header = () => {
   const [isProprietaire, setIsProprietaire] = useState(false);
   //isAdmin
   const [isAdmin, setIsAdmin] = useState(false);
-  const [langue, setLangue] = useState("");
+  const [langue, setLangue] = useState("fr");
+  const [ln, setLn] = useState({});
+  const [Acceuil, setAcceuil] = useState("");
+  const [Voiture, setVoiture] = useState("");
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -47,6 +51,7 @@ const Header = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
   // //methide to destroy token
   const destroyToken = () => {
     localStorage.removeItem("role");
@@ -58,7 +63,7 @@ const Header = () => {
     localStorage.removeItem("email");
 
     //refrech
-    window.location.reload();
+    window.location.href = "/";
   };
   //dispatch isLoggedOut action to redux store
 
@@ -68,6 +73,32 @@ const Header = () => {
   //   // If the token is not present, redirect the user to the login page
   //   // window.location.href = '/login';
   // }
+  useEffect(() => {
+    // Make a request to the web API to fetch the menu items
+    console.log(langue);
+    axios
+      .get(
+        `https://localhost:7047/api/Phrase/Language_test?languageCode=${langue}`
+      )
+      .then((response) => {
+        // Extract the menu items from the data and store them in a state variable
+        console.log(response.data);
+
+        setLn(response.data);
+        const value = response.data.map((item) => {
+          if (item.key === "Acceuil") {
+            return item.value;
+          }
+        });
+        setAcceuil(value);
+        const value2 = response.data.map((item) => {
+          if (item.key === "Voiture") {
+            return item.value;
+          }
+        });
+        setVoiture(value2);
+      });
+  });
   const role = localStorage.getItem("role");
   //test token with useEffect
   useEffect(() => {
@@ -109,9 +140,9 @@ const Header = () => {
                 value={value}
                 onChange={(e, value) => setValue(value)}
               >
-                <Tab label="Acceuil" />
+                <Tab label={Acceuil} />
                 <Tab
-                  label="Voitures"
+                  label={Voiture}
                   onClick={() => history.push("/Voitures")}
                 />
                 {isLocataire && (
@@ -169,6 +200,7 @@ const Header = () => {
                   onChange={(e) => {
                     setLangue(e.target.value);
                   }}
+                  defaultValue={"fr"}
                 >
                   <MenuItem style={{ display: "flex" }} value={"fr"}>
                     <img

@@ -34,7 +34,11 @@ export default function SidenavDataLocataire({ handleDrawerClose }) {
       icon: <BookIcon />,
     },
 
-    { label: "logout", link: "/Dashboard/logout", icon: <ExitToAppIcon /> },
+    {
+      label: "Reclamation",
+      link: "/Locataire/Reclamations",
+      icon: <ExitToAppIcon />,
+    },
   ];
 
   return (

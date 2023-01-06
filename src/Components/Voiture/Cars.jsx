@@ -21,6 +21,7 @@ import image6 from "../Acceuil/image/slider-5.jpg";
 import image7 from "../Acceuil/image/slider-1.jpg";
 
 import { Button } from "@material-ui/core";
+import axios from "axios";
 
 const Cars = ({
   image2,
@@ -37,10 +38,13 @@ const Cars = ({
   const handleClickOpen = () => {
     setOpen(true);
   };
-
+  const [date, setDate] = React.useState("");
+  const [facture, setfacture] = React.useState({});
+  const [prix2, setprix2] = React.useState(false);
   const handleClose = () => {
     setOpen(false);
   };
+
   const [open2, setOpen2] = React.useState(false);
   const handleClickOpen2 = () => {
     setOpen2(true);
@@ -69,6 +73,29 @@ const Cars = ({
   const ImgContainer = styled(Box)(() => ({
     width: "100%",
   }));
+  async function handleSubmit(event) {
+    event.preventDefault(); // Prevent the default form submission behavior
+    setfacture({
+      idVoiture: 1010,
+      idLocataire: localStorage.getItem("id"),
+      idModePaiement: 1,
+      dateRetour: date,
+      remarque: "succes",
+      mantant: prix * 3,
+    });
+    try {
+      // Make an HTTP request to the API to post the data
+      await axios.post(
+        "https://localhost:7047/api/Locataire/AjouterReservation",
+        facture
+      );
+      // Re-fetch the data from the API to update the table
+    } catch (error) {
+      // Handle any errors that occur during the request
+      console.error(error);
+    }
+    console.log(facture);
+  }
 
   return (
     <HouseBox style={{ fontFamily: "poppins", fontWeight: "400" }}>
@@ -114,7 +141,7 @@ const Cars = ({
           <InfoBox>
             <MonetizationOnIcon />
             <Typography variant="body2" sx={{ mt: 1 }}>
-              {prix} $
+              {prix} DH/jour
             </Typography>
           </InfoBox>
           <InfoBox>
@@ -177,7 +204,7 @@ const Cars = ({
             alignContent: "center",
           }}
         >
-          {localStorage.getItem("role") === "locataire" ? (
+          {localStorage.getItem("role") === "locataire" && disponibilité ? (
             <Button
               onClick={handleClickOpen}
               style={{
@@ -268,19 +295,61 @@ const Cars = ({
                 </Typography>
                 <Typography
                   style={{
-                    fontSize: "23px",
+                    fontSize: "17px",
                     fontFamily: "poppins",
-                    color: "#5ba642",
-                    fontWeight: "500",
-                    textAlign: "center",
-                    marginTop: "10px",
                   }}
                   variant="body2"
                   color="textSecondary"
                   component="p"
                 >
-                  Prix: {prix} $
+                  <span style={{ color: "black", fontWeight: "400" }}>
+                    prix:
+                  </span>{" "}
+                  {prix} DH/jour
                 </Typography>
+                <label
+                  style={{
+                    fontSize: "17px",
+                    fontFamily: "poppins",
+                  }}
+                >
+                  date retour :
+                </label>
+                <input
+                  type="date"
+                  style={{
+                    marginLeft: "5px",
+                    padding: "3px",
+                    fontSize: "17px",
+                    fontFamily: "poppins",
+                  }}
+                  name=""
+                  id=""
+                  value={date}
+                  onChange={(e) => {
+                    setDate(e.target.value);
+                    setprix2(true);
+                    console.log(date);
+                  }}
+                />
+
+                {prix2 ? (
+                  <Typography
+                    style={{
+                      fontSize: "23px",
+                      fontFamily: "poppins",
+                      color: "#5ba642",
+                      fontWeight: "500",
+                      textAlign: "center",
+                      marginTop: "10px",
+                    }}
+                    variant="body2"
+                    color="textSecondary"
+                    component="p"
+                  >
+                    Prix total: {prix * 3} DH
+                  </Typography>
+                ) : null}
               </CardContent>
               <CardContent>
                 <Typography variant="body2" color="textSecondary" component="p">
@@ -295,7 +364,7 @@ const Cars = ({
                     textAlign: "center",
                     marginTop: "10px",
                   }}
-                  onClick={handleClickOpen2}
+                  onClick={handleSubmit}
                 >
                   RESERVER VOTRE VOITURE!!!!
                 </Button>

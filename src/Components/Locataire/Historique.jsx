@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MaterialTable from "material-table";
 import GetAppIcon from "@material-ui/icons/GetApp";
 import AddIcon from "@material-ui/icons/Add";
@@ -7,64 +7,67 @@ import { ThemeProvider, createTheme } from "@mui/material";
 import SentimentVeryDissatisfiedIcon from "@material-ui/icons/SentimentVeryDissatisfied";
 import HelpIcon from "@material-ui/icons/Help";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-export default function Historique() {
-  const defaultMaterialTheme = createTheme();
-  const [tableData, setTableData] = useState([
-    {
-      Nom: "BOUGARRANI",
-      Prenom: "IDRISS",
-      Tel: 7894561230,
-      Age: 18,
+import axios from "axios";
 
-      Adress: "Fes",
-    },
-    {
-      Nom: "BOUFNICHEL",
-      Prenom: "YASSINE",
-      Tel: 156561262,
-      Age: 28,
-      Adress: "SEFROU",
-    },
-  ]);
+export default function Locataire() {
+  const defaultMaterialTheme = createTheme();
+  const [tableData, setTableData] = useState([]);
+
+  const [selected, setSelected] = useState([]);
+
+  useEffect(() => {
+    fetch(
+      `https://localhost:7047/api/Locataire/AllReservationsByIdLocataire/${localStorage.getItem(
+        "id"
+      )}`
+    )
+      .then((resp) => resp.json())
+      .then((resp) => {
+        console.log(tableData);
+        setTableData(resp);
+      });
+  }, []);
+
   const columns = [
     {
-      title: "Nom",
-      field: "Nom",
+      title: "nomProp",
+      field: "nomProp",
       sorting: false,
       filtering: false,
       cellStyle: { background: "#dfc482" },
       headerStyle: { color: "#fff" },
     },
     {
-      title: "Prenom",
-      field: "Prenom",
+      title: "nomLocataire",
+      field: "nomLocataire",
       sorting: false,
       filtering: false,
       cellStyle: { background: "#dfc482" },
       headerStyle: { color: "#fff" },
     },
 
-    { title: "Tel", field: "Tel", align: "center", grouping: false },
     {
-      title: "Age",
-      field: "Age",
-      emptyValue: () => <em>null</em>,
-      render: (rowData) => (
-        <div
-          style={{
-            background: rowData.age >= 18 ? "#008000aa" : "#f90000aa",
-            borderRadius: "4px",
-            paddingLeft: 5,
-          }}
-        >
-          {rowData.age >= 18 ? "18+" : "18-"}
-        </div>
-      ),
-      searchable: false,
-      export: false,
+      title: "dateRetour",
+      field: "dateRetour",
+      align: "center",
+      grouping: false,
     },
 
-    { title: "Adress", field: "Adress", filterPlaceholder: "filter" },
+    {
+      title: "remarque",
+      field: "remarque",
+      filterPlaceholder: "filter",
+    },
+    {
+      title: "mantant",
+      field: "mantant",
+      filterPlaceholder: "filter",
+    },
+    {
+      title: "modePaiement",
+      field: "modePaiement",
+      filterPlaceholder: "filter",
+    },
   ];
   return (
     <div className="App">
@@ -72,39 +75,63 @@ export default function Historique() {
         <MaterialTable
           columns={columns}
           data={tableData}
-          editable={{
-            onRowAdd: (newRow) =>
-              new Promise((resolve, reject) => {
-                setTableData([...tableData, newRow]);
+          onSelectionChange={(selectedRows) => {
+            const selectedItems = selectedRows.map((row) => ({
+              nom: row.nom,
+              prenom: row.prenom,
+              idLocataire: row.idUser,
+            }));
+            setSelected(selectedItems);
 
-                setTimeout(() => resolve(), 500);
-              }),
-            onRowUpdate: (newRow, oldRow) =>
-              new Promise((resolve, reject) => {
-                const updatedData = [...tableData];
-                updatedData[oldRow.tableData.id] = newRow;
-                setTableData(updatedData);
-                setTimeout(() => resolve(), 500);
-              }),
-            onRowDelete: (selectedRow) =>
-              new Promise((resolve, reject) => {
-                const updatedData = [...tableData];
-                updatedData.splice(selectedRow.tableData.id, 1);
-                setTableData(updatedData);
-                setTimeout(() => resolve(), 1000);
-              }),
+            //console.log(selected[0].idLocataire)
           }}
           actions={[
             {
               icon: () => <SentimentVeryDissatisfiedIcon />,
               tooltip: "Liste noire",
-              onClick: (e, data) => console.log(data),
+              onClick: () => {
+                fetch(
+                  `https://localhost:7047/api/Admin/addToNoir/${selected[0].idLocataire}`,
+                  {
+                    method: "PUT",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(selected[0]),
+                  }
+                )
+                  .then((response) => response.json())
+                  .then((data) => {
+                    console.log("Success:", data);
+                  })
+                  .catch((error) => {
+                    console.error("Error:", error);
+                  });
+              },
               //isFreeAction: true,
             },
             {
               icon: () => <FavoriteIcon />,
               tooltip: "liste favoris",
-              onClick: (e, data) => console.log(data),
+              onClick: () => {
+                fetch(
+                  `https://localhost:7047/api/Admin/addToFavori/${selected[0].idLocataire}`,
+                  {
+                    method: "PUT",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(selected[0]),
+                  }
+                )
+                  .then((response) => response.json())
+                  .then((data) => {
+                    console.log("Success:", data);
+                  })
+                  .catch((error) => {
+                    console.error("Error:", error);
+                  });
+              },
               //isFreeAction: true,
             },
             {
@@ -114,7 +141,6 @@ export default function Historique() {
               //isFreeAction: true,
             },
           ]}
-          onSelectionChange={(selectedRows) => console.log(selectedRows)}
           options={{
             sorting: true,
             search: true,
